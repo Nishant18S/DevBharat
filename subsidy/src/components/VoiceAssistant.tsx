@@ -51,6 +51,7 @@ const VoiceAssistant: React.FC = () => {
   const [inputText, setInputText] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('hi'); // Default to Hindi
+  const [showPopup, setShowPopup] = useState<boolean>(true);
   
   // Hardcoded API key - Gemini 2.0 Flash Pro version with no rate limits
   const apiKey = 'AIzaSyAn80nBH76GuwNGQVkw5-s7VPGZm368t5w';
@@ -450,10 +451,34 @@ const VoiceAssistant: React.FC = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
+      {/* KrishiShayak Popup */}
+      {!isOpen && showPopup && (
+        <div className="absolute bottom-20 right-0 mb-2 mr-2 z-60">
+          <div className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-4 py-2 rounded-lg shadow-lg relative animate-bounce">
+            <div className="flex items-center space-x-2">
+              <span className="text-sm font-medium">🌾 KrishiShayak</span>
+              <button
+                onClick={() => setShowPopup(false)}
+                className="text-white hover:text-gray-200 transition-colors"
+                title="Close popup"
+              >
+                <X size={14} />
+              </button>
+            </div>
+            <p className="text-xs mt-1">Your AI Farming Expert</p>
+            {/* Arrow pointing to chatbot */}
+            <div className="absolute -bottom-2 right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-green-600"></div>
+          </div>
+        </div>
+      )}
+
       {/* Floating Chat Button */}
       {!isOpen && (
         <button
-          onClick={() => setIsOpen(true)}
+          onClick={() => {
+            setIsOpen(true);
+            setShowPopup(false);
+          }}
           className="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
         >
           <MessageCircle size={24} />
