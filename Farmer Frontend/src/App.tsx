@@ -32,8 +32,8 @@ function App() {
                 name: farmerName,
                 landSize: 3.2,
                 annualIncome: 250000,
-                cropType: "wheat",
-                aadhaar: "123456789012",
+                
+                aadhaar: sessionStorage.getItem('aadhaars') || "123456789012",
               };
 
           setCurrentUser(userData);
@@ -110,7 +110,6 @@ function App() {
           <ProductsManager
             currentUser={currentUser}
             showModal={showModal}
-            setActiveTab={setActiveTab} // Pass the function here
           />
         );
       case "upload":
@@ -144,9 +143,11 @@ function App() {
     <div className="app">
       <div id="particles"></div>
 
-      <Header currentUser={currentUser} onLogout={handleLogout} />
+      {currentUser && (
+        <Header currentUser={currentUser} onLogout={handleLogout} />
+      )}
 
-      <Navigation activeTab={activeTab} onTabChange={setActiveTab} />
+      <Navigation activeTab={activeTab} onTabChange={setActiveTab} currentUser={currentUser} />
 
       <main className="main-content">{renderTabContent()}</main>
 
