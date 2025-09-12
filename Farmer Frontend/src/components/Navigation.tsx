@@ -7,7 +7,8 @@ import {
   ShoppingCart, 
   Brain, 
   Bot,
-  Leaf
+  Leaf,
+  Home
 } from 'lucide-react';
 
 interface NavigationProps {
@@ -37,6 +38,7 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange, current
       window.location.href = 'http://localhost:5174';
     }
   };
+  
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
     { id: 'subsidy', label: 'Schemes', icon: HandCoins },
@@ -62,12 +64,20 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange, current
             </button>
           );
         })}
+
         <button
           className="nav-tab"
           onClick={openSubsidyWorkflow}
         >
           <Leaf size={16} />
           Farmer Subsidy
+        </button>
+        <button
+          className="nav-tab"
+          onClick={() => window.location.href = 'http://localhost:8080/'}
+        >
+          <Home size={16} />
+          Home
         </button>
         <button
           className="nav-tab"
