@@ -6,6 +6,7 @@ import FarmProgress from './dashboard/FarmProgress';
 import MarketPrices from './dashboard/MarketPrices';
 import WeatherWidget from './dashboard/WeatherWidget';
 import ChartsSection from './dashboard/ChartsSection';
+import VoiceAssistant from './VoiceAssistant';
 
 interface DashboardProps {
   currentUser: User;
@@ -47,6 +48,9 @@ const Dashboard: React.FC<DashboardProps> = ({ currentUser }) => {
           </p>
         </div>
       </footer>
+      
+      {/* Voice Assistant */}
+      <VoiceAssistant />
     </div>
   );
 };

@@ -224,7 +224,7 @@ const ProductsManager: React.FC<ProductsManagerProps> = ({ currentUser, showModa
           <div style={{
             maxWidth: '550px',
             width: '100%',
-            maxHeight: '80vh',
+            maxHeight: '100vh',
             backgroundColor: 'white',
             borderRadius: '16px',
             overflow: 'hidden',
