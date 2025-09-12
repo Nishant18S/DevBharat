@@ -62,24 +62,22 @@ export const LocationPicker: React.FC<LocationPickerProps> = ({ value, onChange 
 
   return (
     <div className="space-y-2">
-      <div className="flex space-x-2">
-        <input
-          type="text"
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
-          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
-          placeholder="Village, District, State"
-        />
-        <button
-          type="button"
-          onClick={getCurrentLocation}
-          disabled={isLoading}
-          className="px-4 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white rounded-lg transition-colors flex items-center space-x-2"
-        >
-          {isLoading ? <Loader className="h-4 w-4 animate-spin" /> : <MapPin className="h-4 w-4" />}
-          <span className="hidden sm:inline">{isLoading ? 'Detecting...' : 'Get Location'}</span>
-        </button>
-      </div>
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors"
+        placeholder="Village, District, State"
+      />
+      <button
+        type="button"
+        onClick={getCurrentLocation}
+        disabled={isLoading}
+        className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white rounded-lg transition-colors flex items-center space-x-2"
+      >
+        {isLoading ? <Loader className="h-4 w-4 animate-spin" /> : <MapPin className="h-4 w-4" />}
+        <span>{isLoading ? 'Detecting...' : 'Get Location'}</span>
+      </button>
     </div>
   );
 };
