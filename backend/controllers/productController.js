@@ -1,11 +1,19 @@
 const Product = require('../models/Product');
 const Farmer = require('../models/Farmer');
+const cloudinary = require('cloudinary').v2;
 
 // Upload Product
 exports.uploadProduct = async (req, res) => {
   try {
     const { name, price, quantity, unit, aadhaar, description, location, contactNumber, category } = req.body;
-    const image = req.file ? req.file.path : null;
+    
+    // Check if file was uploaded
+    if (!req.file) {
+      return res.status(400).json({ message: 'Product image is required' });
+    }
+
+    // Get the complete Cloudinary URL from req.file
+    const image = req.file.path;
 
     // Validate required fields
     if (!name || !price || !quantity || !unit || !aadhaar || !description || !location || !contactNumber || !category) {
@@ -29,7 +37,7 @@ exports.uploadProduct = async (req, res) => {
       unit,
       category,
       location,
-      image
+      image // This should now be the complete Cloudinary URL
     });
 
     await newProduct.save();
@@ -40,48 +48,84 @@ exports.uploadProduct = async (req, res) => {
   }
 };
 
-// Get All Products
+// Get All Products with fixed image URLs
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
-    res.status(200).json(products);
+    
+    // Fix incomplete Cloudinary URLs if needed
+    const productsWithFixedUrls = products.map(product => {
+      if (product.image && !product.image.includes('http')) {
+        // This is a fallback for incomplete URLs - adjust based on your Cloudinary account
+        product.image = `https://res.cloudinary.com/drnedkcn3/image/upload/v1757848245/products/${product.image}`;
+      }
+      return product;
+    });
+    
+    res.status(200).json(productsWithFixedUrls);
   } catch (err) {
     console.error('Error fetching products:', err.message);
     res.status(500).json({ message: 'Error fetching products', error: err.message });
   }
 };
 
-// Get Products by Category
+// Get Products by Category with fixed URLs
 exports.getProductsByCategory = async (req, res) => {
   try {
     const { category } = req.params;
     const products = await Product.find({ category });
-    res.status(200).json(products);
+    
+    // Fix incomplete Cloudinary URLs if needed
+    const productsWithFixedUrls = products.map(product => {
+      if (product.image && !product.image.includes('http')) {
+        product.image = `https://res.cloudinary.com/drnedkcn3/image/upload/v1757848245/products/${product.image}`;
+      }
+      return product;
+    });
+    
+    res.status(200).json(productsWithFixedUrls);
   } catch (err) {
     console.error('Error fetching products by category:', err.message);
     res.status(500).json({ message: 'Error fetching products', error: err.message });
   }
 };
 
-// Get Products by Farmer (Aadhaar)
+// Get Products by Farmer with fixed URLs
 exports.getProductsByFarmer = async (req, res) => {
   try {
     const { aadhaar } = req.params;
     const products = await Product.find({ aadhaar });
-    res.status(200).json(products);
+    
+    // Fix incomplete Cloudinary URLs if needed
+    const productsWithFixedUrls = products.map(product => {
+      if (product.image && !product.image.includes('http')) {
+        product.image = `https://res.cloudinary.com/drnedkcn3/image/upload/v1757848245/products/${product.image}`;
+      }
+      return product;
+    });
+    
+    res.status(200).json(productsWithFixedUrls);
   } catch (err) {
     console.error('Error fetching farmer products:', err.message);
     res.status(500).json({ message: 'Error fetching products', error: err.message });
   }
 };
 
-// Update Product
+// Update Product - Handle image update if needed
 exports.updateProduct = async (req, res) => {
   try {
     const { name, price, quantity, unit, description, category } = req.body;
+    
+    const updateData = { name, price, quantity, unit, description, category };
+    
+    // If a new image was uploaded, add it to the update data
+    if (req.file) {
+      updateData.image = req.file.path; // Complete Cloudinary URL
+    }
+    
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      { name, price, quantity, unit, description, category },
+      updateData,
       { new: true, runValidators: true }
     );
 
@@ -96,15 +140,27 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-// Delete Product
+// Delete Product - Also delete from Cloudinary if needed
 exports.deleteProduct = async (req, res) => {
   try {
-    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
-
-    if (!deletedProduct) {
+    const product = await Product.findById(req.params.id);
+    
+    if (!product) {
       return res.status(404).json({ message: 'Product not found' });
     }
-
+    
+    // Optional: Delete image from Cloudinary
+    if (product.image && product.image.includes('cloudinary.com')) {
+      try {
+        const publicId = product.image.split('/').pop().split('.')[0];
+        await cloudinary.uploader.destroy(`products/${publicId}`);
+      } catch (cloudinaryError) {
+        console.error('Error deleting from Cloudinary:', cloudinaryError.message);
+        // Continue with product deletion even if Cloudinary deletion fails
+      }
+    }
+    
+    await Product.findByIdAndDelete(req.params.id);
     res.status(200).json({ message: 'Product deleted successfully' });
   } catch (err) {
     console.error('Error deleting product:', err.message);
@@ -112,7 +168,7 @@ exports.deleteProduct = async (req, res) => {
   }
 };
 
-// Search Products
+// Search Products with fixed URLs
 exports.searchProducts = async (req, res) => {
   try {
     const { query } = req.query;
@@ -123,9 +179,41 @@ exports.searchProducts = async (req, res) => {
         { category: { $regex: query, $options: 'i' } }
       ]
     });
-    res.status(200).json(products);
+    
+    // Fix incomplete Cloudinary URLs if needed
+    const productsWithFixedUrls = products.map(product => {
+      if (product.image && !product.image.includes('http')) {
+        product.image = `https://res.cloudinary.com/drnedkcn3/image/upload/v1757848245/products/${product.image}`;
+      }
+      return product;
+    });
+    
+    res.status(200).json(productsWithFixedUrls);
   } catch (err) {
     console.error('Error searching products:', err.message);
     res.status(500).json({ message: 'Error searching products', error: err.message });
+  }
+};
+
+// One-time function to fix existing incomplete URLs
+exports.fixIncompleteUrls = async (req, res) => {
+  try {
+    const products = await Product.find();
+    let fixedCount = 0;
+    
+    for (let product of products) {
+      if (product.image && !product.image.includes('http')) {
+        product.image = `https://res.cloudinary.com/drnedkcn3/image/upload/v1757848245/products/${product.image}`;
+        await product.save();
+        fixedCount++;
+      }
+    }
+    
+    res.status(200).json({ 
+      message: `Fixed ${fixedCount} product image URLs` 
+    });
+  } catch (err) {
+    console.error('Error fixing URLs:', err.message);
+    res.status(500).json({ message: 'Error fixing URLs', error: err.message });
   }
 };

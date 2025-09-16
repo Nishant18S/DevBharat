@@ -1518,7 +1518,7 @@ setTimeout(() => {
   `;
 }, 1000); 
       submitButton.disabled = true;
-      // http://localhost:5000/api/farmer/register
+      // https://kisan-mitra-backend.vercel.app/api/farmer/register
       
       try {
         const formData = new FormData(this);
@@ -1527,7 +1527,7 @@ setTimeout(() => {
         const aadhaar = formData.get('aadhaar').replace(/\D/g, '');
         formData.set('aadhaar', aadhaar);
         
-        const response = await fetch('http://localhost:5000/auth/register', {
+        const response = await fetch('https://kisan-mitra-backend.vercel.app/auth/register', {
           method: 'POST',
           body: formData
         });

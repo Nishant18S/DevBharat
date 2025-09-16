@@ -135,7 +135,7 @@ const ProductUpload: React.FC<ProductUploadProps> = ({ currentUser, onSuccess })
     }
 
     try {
-      const res = await fetch('http://localhost:5000/api/products/upload', {
+      const res = await fetch('https://kisan-mitra-backend.vercel.app/api/products/upload', {
         method: 'POST',
         body: uploadFormData
       });

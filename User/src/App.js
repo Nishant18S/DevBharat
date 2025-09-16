@@ -15,14 +15,14 @@ const CustomAlert = ({ message, onClose }) => {
   }, [onClose]);
   return (
     <div className="toast-container">
-      {" "}
       <div className="toast-notification">
-        {" "}
-        <p>{message}</p> <button onClick={onClose}>&times;</button>{" "}
-      </div>{" "}
+        <p>{message}</p>
+        <button onClick={onClose}>&times;</button>
+      </div>
     </div>
   );
 };
+
 const Clock = () => {
   const [time, setTime] = useState(new Date());
   useEffect(() => {
@@ -95,6 +95,7 @@ const Header = ({ setPage, user, cartItemCount, handleLogout }) => (
     </div>
   </header>
 );
+
 const Sidebar = ({ page, setPage }) => {
   const navItems = [
     { name: "Products", page: "products" },
@@ -105,24 +106,20 @@ const Sidebar = ({ page, setPage }) => {
   ];
   return (
     <aside className="sidebar">
-      {" "}
       <nav>
-        {" "}
         <ul>
-          {" "}
           {navItems.map((item) => (
             <li key={item.name}>
-              {" "}
               <button
                 onClick={() => setPage(item.page)}
                 className={page === item.page ? "active" : ""}
               >
                 {item.name}
-              </button>{" "}
+              </button>
             </li>
-          ))}{" "}
-        </ul>{" "}
-      </nav>{" "}
+          ))}
+        </ul>
+      </nav>
     </aside>
   );
 };
@@ -135,10 +132,12 @@ const AuthPage = ({ handleLogin, handleRegister, setPage }) => {
   const [signUpName, setSignUpName] = useState("");
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
+
   const handleSignInSubmit = (e) => {
     e.preventDefault();
     handleLogin(signInEmail, signInPassword);
   };
+
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
     handleRegister({
@@ -147,195 +146,178 @@ const AuthPage = ({ handleLogin, handleRegister, setPage }) => {
       password: signUpPassword,
     });
   };
+
   return (
-    <div
-      className={`auth-page-container ${isSignUpMode ? "sign-up-mode" : ""}`}
-    >
-      {" "}
+    <div className={`auth-page-container ${isSignUpMode ? "sign-up-mode" : ""}`}>
       <div className="forms-container">
-        {" "}
         <div className="signin-signup">
-          {" "}
           <form onSubmit={handleSignInSubmit} className="sign-in-form">
-            {" "}
-            <h1 className="auth-logo-text">Kisan Mitra</h1>{" "}
-            <h2 className="title">Sign in</h2>{" "}
+            <h1 className="auth-logo-text">Kisan Mitra</h1>
+            <h2 className="title">Sign in</h2>
             <div className="input-field">
-              {" "}
-              <i className="fas fa-envelope"></i>{" "}
+              <i className="fas fa-envelope"></i>
               <input
                 type="email"
                 placeholder="Email"
                 value={signInEmail}
                 onChange={(e) => setSignInEmail(e.target.value)}
                 required
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <div className="input-field">
-              {" "}
-              <i className="fas fa-lock"></i>{" "}
+              <i className="fas fa-lock"></i>
               <input
                 type="password"
                 placeholder="Password"
                 value={signInPassword}
                 onChange={(e) => setSignInPassword(e.target.value)}
                 required
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <button
               type="button"
               className="forgot-password-btn"
               onClick={() => setPage("forgotPassword")}
             >
               Forgot Password?
-            </button>{" "}
+            </button>
             <button type="submit" className="btn solid">
               Login
-            </button>{" "}
-          </form>{" "}
+            </button>
+          </form>
           <form onSubmit={handleSignUpSubmit} className="sign-up-form">
-            {" "}
-            <h1 className="auth-logo-text">Kisan Mitra</h1>{" "}
-            <h2 className="title">Sign up</h2>{" "}
+            <h1 className="auth-logo-text">Kisan Mitra</h1>
+            <h2 className="title">Sign up</h2>
             <div className="input-field">
-              {" "}
-              <i className="fas fa-user"></i>{" "}
+              <i className="fas fa-user"></i>
               <input
                 type="text"
                 placeholder="Full Name"
                 value={signUpName}
                 onChange={(e) => setSignUpName(e.target.value)}
                 required
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <div className="input-field">
-              {" "}
-              <i className="fas fa-envelope"></i>{" "}
+              <i className="fas fa-envelope"></i>
               <input
                 type="email"
                 placeholder="Email"
                 value={signUpEmail}
                 onChange={(e) => setSignUpEmail(e.target.value)}
                 required
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <div className="input-field">
-              {" "}
-              <i className="fas fa-lock"></i>{" "}
+              <i className="fas fa-lock"></i>
               <input
                 type="password"
                 placeholder="Password"
                 value={signUpPassword}
                 onChange={(e) => setSignUpPassword(e.target.value)}
                 required
-              />{" "}
-            </div>{" "}
+              />
+            </div>
             <button type="submit" className="btn solid">
               Sign up
-            </button>{" "}
-          </form>{" "}
-        </div>{" "}
-      </div>{" "}
+            </button>
+          </form>
+        </div>
+      </div>
       <div className="panels-container">
-        {" "}
         <div className="panel left-panel">
-          {" "}
           <div className="content">
-            {" "}
-            <h3>New here ?</h3>{" "}
+            <h3>New here?</h3>
             <p>
               Join the Kisan Mitra community today and connect directly with
               farmers!
-            </p>{" "}
+            </p>
             <button
               className="btn transparent"
               onClick={() => setIsSignUpMode(true)}
             >
               Sign up
-            </button>{" "}
-          </div>{" "}
-          <img src={loginImage} className="image" alt="" />{" "}
-        </div>{" "}
+            </button>
+          </div>
+          <img src={loginImage} className="image" alt="" />
+        </div>
         <div className="panel right-panel">
-          {" "}
           <div className="content">
-            {" "}
-            <h3>One of us ?</h3>{" "}
+            <h3>One of us?</h3>
             <p>
               Already have an account? Sign in to access your dashboard and the
               marketplace.
-            </p>{" "}
+            </p>
             <button
               className="btn transparent"
               onClick={() => setIsSignUpMode(false)}
             >
               Sign in
-            </button>{" "}
-          </div>{" "}
-          <img src={registerImage} className="image" alt="" />{" "}
-        </div>{" "}
-      </div>{" "}
+            </button>
+          </div>
+          <img src={registerImage} className="image" alt="" />
+        </div>
+      </div>
     </div>
   );
 };
+
 const ForgotPasswordPage = ({ handleUpdatePassword, setPage }) => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleUpdatePassword(email, newPassword);
   };
+
   return (
     <div className="simple-auth-container">
-      {" "}
       <div className="simple-auth-card">
-        {" "}
-        <h1 className="auth-logo-text">Kisan Mitra</h1>{" "}
-        <h2 className="title">Reset Password</h2>{" "}
-        <p className="form-subtitle">Enter your email and new password.</p>{" "}
+        <h1 className="auth-logo-text">Kisan Mitra</h1>
+        <h2 className="title">Reset Password</h2>
+        <p className="form-subtitle">Enter your email and new password.</p>
         <form onSubmit={handleSubmit} className="simple-form">
-          {" "}
           <div className="input-field">
-            {" "}
-            <i className="fas fa-envelope"></i>{" "}
+            <i className="fas fa-envelope"></i>
             <input
               type="email"
               placeholder="Your Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-            />{" "}
-          </div>{" "}
+            />
+          </div>
           <div className="input-field">
-            {" "}
-            <i className="fas fa-lock"></i>{" "}
+            <i className="fas fa-lock"></i>
             <input
               type="password"
               placeholder="New Password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-            />{" "}
-          </div>{" "}
+            />
+          </div>
           <button
             type="submit"
             className="btn solid"
             style={{ width: "100%", marginTop: "10px" }}
           >
             Update Password
-          </button>{" "}
+          </button>
           <button
             type="button"
             className="forgot-password-btn"
             onClick={() => setPage("login")}
           >
             Back to Login
-          </button>{" "}
-        </form>{" "}
-      </div>{" "}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
+
 const ProfilePage = ({ user, handleProfileUpdate, handleAvatarUpdate }) => {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
@@ -552,9 +534,11 @@ const ProfilePage = ({ user, handleProfileUpdate, handleAvatarUpdate }) => {
     </div>
   );
 };
+
 const SettingsPage = ({ user, handleUpdatePassword }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newPassword !== confirmPassword) {
@@ -564,50 +548,47 @@ const SettingsPage = ({ user, handleUpdatePassword }) => {
     setNewPassword("");
     setConfirmPassword("");
   };
+
   return (
     <div className="page-content">
-      {" "}
-      <h2>Settings</h2>{" "}
+      <h2>Settings</h2>
       <div className="settings-form-card">
-        {" "}
-        <h2 className="title">Change Password</h2>{" "}
-        <p className="form-subtitle">Update the password for your account.</p>{" "}
+        <h2 className="title">Change Password</h2>
+        <p className="form-subtitle">Update the password for your account.</p>
         <form onSubmit={handleSubmit} className="simple-form">
-          {" "}
           <div className="input-field">
-            {" "}
-            <i className="fas fa-lock"></i>{" "}
+            <i className="fas fa-lock"></i>
             <input
               type="password"
               placeholder="New Password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-            />{" "}
-          </div>{" "}
+            />
+          </div>
           <div className="input-field">
-            {" "}
-            <i className="fas fa-lock"></i>{" "}
+            <i className="fas fa-lock"></i>
             <input
               type="password"
               placeholder="Confirm New Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-            />{" "}
-          </div>{" "}
+            />
+          </div>
           <button
             type="submit"
             className="btn solid"
             style={{ width: "100%", marginTop: "10px" }}
           >
             Update Password
-          </button>{" "}
-        </form>{" "}
-      </div>{" "}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
+
 const AnalyticsPage = ({ purchaseHistory }) => {
   const totalOrders = purchaseHistory.length;
   const totalSpent = purchaseHistory.reduce(
@@ -642,81 +623,74 @@ const AnalyticsPage = ({ purchaseHistory }) => {
     const percentage = (value / maxCategory) * 100;
     return Math.max(percentage, 15);
   };
+
   return (
     <div className="page-content">
-      {" "}
-      <h2>Analytics</h2>{" "}
+      <h2>Analytics</h2>
       <div className="analytics-grid">
-        {" "}
         <div className="card analytics-card">
-          {" "}
-          <h3>Total Orders</h3> <p>{totalOrders}</p>{" "}
-        </div>{" "}
+          <h3>Total Orders</h3>
+          <p>{totalOrders}</p>
+        </div>
         <div className="card analytics-card">
-          {" "}
-          <h3>Total Spent</h3> <p>₹{totalSpent.toFixed(0)}</p>{" "}
-        </div>{" "}
+          <h3>Total Spent</h3>
+          <p>₹{totalSpent.toFixed(0)}</p>
+        </div>
         <div className="card analytics-card">
-          {" "}
-          <h3>Products Purchased</h3> <p>{productsPurchased}</p>{" "}
-        </div>{" "}
+          <h3>Products Purchased</h3>
+          <p>{productsPurchased}</p>
+        </div>
         <div className="card analytics-card">
-          {" "}
-          <h3>Savings This Month</h3> <p>{savingsThisMonth}</p>{" "}
-        </div>{" "}
-      </div>{" "}
+          <h3>Savings This Month</h3>
+          <p>{savingsThisMonth}</p>
+        </div>
+      </div>
       {purchaseHistory.length > 0 && (
         <div className="dashboard-charts">
-          {" "}
           <div className="card chart-card">
-            {" "}
-            <h3>Recent Sales Data (₹)</h3>{" "}
+            <h3>Recent Sales Data (₹)</h3>
             <div className="bar-chart">
-              {" "}
               {salesData.map((d, index) => (
                 <div key={d.month} className="bar-item">
-                  {" "}
                   <div className="bar-label">
                     ₹{d.sales.toLocaleString()}
-                  </div>{" "}
+                  </div>
                   <div
                     className="bar"
                     style={{
                       height: `${getSalesHeight(d.sales)}%`,
                       animationDelay: `${index * 0.2}s`,
                     }}
-                  ></div>{" "}
-                  <div className="bar-category">{d.month}</div>{" "}
+                  ></div>
+                  <div className="bar-category">{d.month}</div>
                 </div>
-              ))}{" "}
-            </div>{" "}
-          </div>{" "}
+              ))}
+            </div>
+          </div>
           <div className="card chart-card">
-            {" "}
-            <h3>Popular Product Categories</h3>{" "}
+            <h3>Popular Product Categories</h3>
             <div className="bar-chart">
-              {" "}
               {categoryData.map((d, index) => (
                 <div key={d.name} className="bar-item">
-                  {" "}
-                  <div className="bar-label">{d.value}%</div>{" "}
+                  <div className="bar-label">{d.value}%</div>
                   <div
                     className="bar bar-secondary"
                     style={{
                       height: `${getCategoryHeight(d.value)}%`,
                       animationDelay: `${index * 0.2}s`,
                     }}
-                  ></div>{" "}
-                  <div className="bar-category">{d.name}</div>{" "}
+                  ></div>
+                  <div className="bar-category">{d.name}</div>
                 </div>
-              ))}{" "}
-            </div>{" "}
-          </div>{" "}
+              ))}
+            </div>
+          </div>
         </div>
-      )}{" "}
+      )}
     </div>
   );
 };
+
 const ProductsPage = ({
   products,
   loading,
@@ -727,56 +701,52 @@ const ProductsPage = ({
   if (loading) {
     return (
       <div className="page-content">
-        {" "}
-        <h2>Marketplace</h2>{" "}
+        <h2>Marketplace</h2>
         <div className="loading-container">
-          {" "}
-          <div className="loading-spinner"></div> <p>Loading Products...</p>{" "}
-        </div>{" "}
+          <div className="loading-spinner"></div>
+          <p>Loading Products...</p>
+        </div>
       </div>
     );
   }
+
   if (error) {
     return (
       <div className="page-content">
-        {" "}
-        <h2>Marketplace</h2>{" "}
+        <h2>Marketplace</h2>
         <div className="empty-state">
-          {" "}
-          <i className="fas fa-exclamation-triangle"></i>{" "}
-          <h3>Connection Error</h3> <p>{error}</p>{" "}
+          <i className="fas fa-exclamation-triangle"></i>
+          <h3>Connection Error</h3>
+          <p>{error}</p>
           <button className="btn solid" onClick={fetchProducts}>
-            {" "}
-            <i className="fas fa-sync"></i> Retry{" "}
-          </button>{" "}
-        </div>{" "}
+            <i className="fas fa-sync"></i> Retry
+          </button>
+        </div>
       </div>
     );
   }
+
   if (products.length === 0) {
     return (
       <div className="page-content">
-        {" "}
-        <h2>Marketplace</h2>{" "}
+        <h2>Marketplace</h2>
         <div className="empty-state">
-          {" "}
-          <i className="fas fa-box-open"></i> <h3>No Products Available</h3>{" "}
-          <p>Check back later for new products from our suppliers.</p>{" "}
-        </div>{" "}
+          <i className="fas fa-box-open"></i>
+          <h3>No Products Available</h3>
+          <p>Check back later for new products from our suppliers.</p>
+        </div>
       </div>
     );
   }
+
   return (
     <div className="page-content">
-      {" "}
-      <h2>Marketplace</h2>{" "}
+      <h2>Marketplace</h2>
       <div className="product-grid">
-        {" "}
         {products.map((p) => (
           <div key={p._id} className="card product-card">
-            {" "}
             <img
-              src={`http://localhost:5000/${p.image}`}
+              src={p.image || `http://localhost:5001/${p.imagePath}`}
               alt={p.name}
               className="product-image"
               onError={(e) => {
@@ -784,44 +754,37 @@ const ProductsPage = ({
                 e.target.src =
                   "https://placehold.co/400x400/3b82f6/ffffff?text=Image+Not+Found";
               }}
-            />{" "}
+            />
             <div className="product-info">
-              {" "}
               <div className="product-header">
-                {" "}
-                <h3 className="product-name">{p.name}</h3>{" "}
-                <span className="product-badge">Fresh</span>{" "}
-              </div>{" "}
+                <h3 className="product-name">{p.name}</h3>
+                <span className="product-badge">Fresh</span>
+              </div>
               <div className="product-price">
                 ₹{p.price} / {p.unit || "kg"}
-              </div>{" "}
+              </div>
               <div className="product-description">
-                {" "}
-                <i className="fas fa-info-circle"></i>{" "}
-                {p.description || "No description available"}{" "}
-              </div>{" "}
+                <i className="fas fa-info-circle"></i>
+                {p.description || "No description available"}
+              </div>
               <div className="product-farmer">
-                {" "}
-                <i className="fas fa-user"></i> {p.farmerName}{" "}
-              </div>{" "}
+                <i className="fas fa-user"></i> {p.farmerName}
+              </div>
               <div className="product-contact">
-                {" "}
-                <i className="fas fa-phone"></i>{" "}
-                {p.contactNumber || "Not provided"}{" "}
-              </div>{" "}
+                <i className="fas fa-phone"></i>
+                {p.contactNumber || "Not provided"}
+              </div>
               <div className="product-location">
-                {" "}
-                <i className="fas fa-map-marker-alt"></i>{" "}
-                {p.location || "Not available"}{" "}
-              </div>{" "}
+                <i className="fas fa-map-marker-alt"></i>
+                {p.location || "Not available"}
+              </div>
               <div className="product-action">
-                {" "}
                 <input
                   type="number"
                   id={`qty-${p._id}`}
                   defaultValue="1"
                   min="1"
-                />{" "}
+                />
                 <button
                   className="button button-primary"
                   onClick={() => {
@@ -830,60 +793,62 @@ const ProductsPage = ({
                   }}
                 >
                   Add to Cart
-                </button>{" "}
-              </div>{" "}
-            </div>{" "}
+                </button>
+              </div>
+            </div>
           </div>
-        ))}{" "}
-      </div>{" "}
+        ))}
+      </div>
     </div>
   );
 };
+
 const CheckoutPage = ({ cart, updateQuantity, removeFromCart, setPage }) => {
   if (cart.length === 0) {
     return (
       <div className="page-content">
-        {" "}
-        <h2>Shopping Cart</h2>{" "}
+        <h2>Shopping Cart</h2>
         <div className="card empty-cart">
-          {" "}
-          <h3>Your Cart is Empty</h3>{" "}
-          <p>Looks like you haven't added anything yet.</p>{" "}
+          <h3>Your Cart is Empty</h3>
+          <p>Looks like you haven't added anything yet.</p>
           <button
             onClick={() => setPage("products")}
             className="button button-primary"
           >
             Start Shopping
-          </button>{" "}
-        </div>{" "}
+          </button>
+        </div>
       </div>
     );
   }
+
   const subtotal = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
   const tax = subtotal * 0.05;
   const total = subtotal + tax;
+
   return (
     <div className="page-content">
-      {" "}
-      <h2>Shopping Cart</h2>{" "}
+      <h2>Shopping Cart</h2>
       <div className="card checkout-card">
-        {" "}
         {cart.map((item) => (
           <div key={item._id} className="cart-item">
-            {" "}
             <img
-              src={`http://localhost:5000/${item.image}`}
+              src={item.image || `http://localhost:5001/${item.imagePath}`}
               alt={item.name}
-            />{" "}
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src =
+                  "https://placehold.co/100x100/3b82f6/ffffff?text=Image+Not+Found";
+              }}
+            />
             <div className="cart-item-details">
-              {" "}
-              <h3>{item.name}</h3> <p>₹{item.price.toFixed(2)}</p>{" "}
-            </div>{" "}
+              <h3>{item.name}</h3>
+              <p>₹{item.price.toFixed(2)}</p>
+            </div>
             <div className="cart-item-actions">
-              {" "}
               <input
                 type="number"
                 value={item.quantity}
@@ -891,43 +856,44 @@ const CheckoutPage = ({ cart, updateQuantity, removeFromCart, setPage }) => {
                 onChange={(e) =>
                   updateQuantity(item._id, parseInt(e.target.value, 10))
                 }
-              />{" "}
+              />
               <p className="cart-item-total">
                 ₹{(item.price * item.quantity).toFixed(2)}
-              </p>{" "}
+              </p>
               <button
                 onClick={() => removeFromCart(item._id)}
                 className="cart-item-remove"
               >
                 &times;
-              </button>{" "}
-            </div>{" "}
+              </button>
+            </div>
           </div>
-        ))}{" "}
+        ))}
         <div className="checkout-summary">
-          {" "}
           <p>
             <span>Subtotal:</span> <span>₹{subtotal.toFixed(2)}</span>
-          </p>{" "}
+          </p>
           <p>
             <span>Tax (5%):</span> <span>₹{tax.toFixed(2)}</span>
-          </p>{" "}
+          </p>
           <p className="total">
             <span>Total:</span> <span>₹{total.toFixed(2)}</span>
-          </p>{" "}
+          </p>
           <button
             onClick={() => setPage("payment")}
             className="button button-primary"
           >
             Proceed to Payment
-          </button>{" "}
-        </div>{" "}
-      </div>{" "}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
+
 const PaymentPage = ({ setPage, handlePayment, showAlert }) => {
   const [timeLeft, setTimeLeft] = useState(300);
+
   useEffect(() => {
     if (timeLeft === 0) {
       showAlert("Payment time expired!");
@@ -937,36 +903,33 @@ const PaymentPage = ({ setPage, handlePayment, showAlert }) => {
     const timerId = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
     return () => clearInterval(timerId);
   }, [timeLeft, setPage, showAlert]);
+
   return (
     <div className="page-content">
-      {" "}
-      <h2>Complete Your Payment</h2>{" "}
+      <h2>Complete Your Payment</h2>
       <div className="card payment-card">
-        {" "}
-        <p>Scan the QR code with your payment app.</p>{" "}
-        <img src={qrCodeImage} alt="Payment QR Code" className="qr-code" />{" "}
+        <p>Scan the QR code with your payment app.</p>
+        <img src={qrCodeImage} alt="Payment QR Code" className="qr-code" />
         <div className="timer">
           Time Left: {String(Math.floor(timeLeft / 60)).padStart(2, "0")}:
           {String(timeLeft % 60).padStart(2, "0")}
-        </div>{" "}
+        </div>
         <button
           onClick={handlePayment}
           className="button button-primary button-full"
         >
           I Have Paid
-        </button>{" "}
-      </div>{" "}
+        </button>
+      </div>
     </div>
   );
 };
+
 const HistoryPage = ({ purchaseHistory }) => (
   <div className="page-content">
-    {" "}
-    <h2>Your Orders</h2>{" "}
+    <h2>Your Orders</h2>
     <div className="card">
-      {" "}
       <table className="history-table">
-        {" "}
         <thead>
           <tr>
             <th>Order ID</th>
@@ -975,30 +938,28 @@ const HistoryPage = ({ purchaseHistory }) => (
             <th>Items</th>
             <th>Status</th>
           </tr>
-        </thead>{" "}
+        </thead>
         <tbody>
-          {" "}
           {purchaseHistory.map((order) => (
             <tr key={order.orderId}>
-              {" "}
               <td>{order.orderId}</td>
               <td>{new Date(order.date).toLocaleDateString()}</td>
               <td>₹{order.total.toFixed(2)}</td>
               <td>
                 {order.items.reduce((acc, item) => acc + item.quantity, 0)}
-              </td>{" "}
+              </td>
               <td>
                 <span
                   className={`status-badge status-${order.status.toLowerCase()}`}
                 >
                   {order.status}
                 </span>
-              </td>{" "}
+              </td>
             </tr>
-          ))}{" "}
-        </tbody>{" "}
-      </table>{" "}
-    </div>{" "}
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 );
 
@@ -1018,13 +979,13 @@ const Footer = () => (
         </nav>
       </div>
       <div className="footer-copyright">
-                        <span>© 2025</span>
-                        <span className="brand-name">Kisan Mitra</span>
-                        <span>| Crafted with</span>
-                        <span className="heart">❤</span>
-                        <span>by</span>
-                        <span className="team-name">Team DevBharat</span>
-                    </div>
+        <span>© 2025</span>
+        <span className="brand-name">Kisan Mitra</span>
+        <span>| Crafted with</span>
+        <span className="heart">❤</span>
+        <span>by</span>
+        <span className="team-name">Team DevBharat</span>
+      </div>
     </div>
   </footer>
 );
@@ -1061,6 +1022,41 @@ export default function App() {
       setProducts(data);
     } catch (err) {
       setError(err.message);
+      // Fallback to mock data if API fails
+      setProducts([
+        {
+          _id: '1',
+          aadhaar: '233333333333',
+          farmerName: 'Raj Kumar',
+          contactNumber: '+91 9876543210',
+          name: 'Organic Tomatoes',
+          description: 'Fresh, organic tomatoes grown without pesticides',
+          price: 40,
+          quantity: 100,
+          unit: 'kg',
+          category: 'Vegetables',
+          location: 'Bhubaneswar, Odisha',
+          image: 'https://images.pexels.com/photos/1300972/pexels-photo-1300972.jpeg?auto=compress&cs=tinysrgb&w=400',
+          createdAt: new Date().toISOString(),
+          __v: 0
+        },
+        {
+          _id: '2',
+          aadhaar: '344444444444',
+          farmerName: 'Priya Sharma',
+          contactNumber: '+91 9876543211',
+          name: 'Basmati Rice',
+          description: 'Premium quality basmati rice, aged for perfect aroma',
+          price: 80,
+          quantity: 50,
+          unit: 'kg',
+          category: 'Grains',
+          location: 'Cuttack, Odisha',
+          image: 'https://images.pexels.com/photos/1353347/pexels-photo-1353347.jpeg?auto=compress&cs=tinysrgb&w=400',
+          createdAt: new Date().toISOString(),
+          __v: 0
+        }
+      ]);
     } finally {
       setLoading(false);
     }

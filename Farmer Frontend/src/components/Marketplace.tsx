@@ -30,7 +30,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ showModal }) => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/products/products');
+      const response = await fetch('https://kisan-mitra-backend.vercel.app/api/products/products');
       const data = await response.json();
       setProducts(data);
       setFilteredProducts(data);
@@ -148,7 +148,7 @@ const Marketplace: React.FC<MarketplaceProps> = ({ showModal }) => {
             {filteredProducts.map((product) => (
               <div key={product._id || product.id} className="product-card">
                 <img 
-                  src={`http://localhost:5000/${product.image}`}
+                  src={product.image}
                   alt={product.name}
                   className="product-image"
                   onError={(e) => {
