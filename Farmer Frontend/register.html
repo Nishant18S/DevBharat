@@ -9,21 +9,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary-green: #0f766e;
-      --secondary-green: #14b8a6;
-      --accent-gold: #f59e0b;
-      --light-green: #7dd3fc;
-      --cream: #fefefe;
-      --earth-brown: #92400e;
-      --dark-gray: #1f2937;
+      --primary-green: #1fb936;
+      --secondary-green: #4a7c59;
+      --accent-gold: #d4af37;
+      --light-green: #a8d5ba;
+      --cream: #fefdf8;
+      --earth-brown: #8b4513;
+      --dark-green: #1a3a1c;
+      --soil-brown: #6b4423;
       --light-gray: #f8fafc;
-      --success: #10b981;
-      --error: #ef4444;
-      --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-      --border-radius: 16px;
+      --success: #16a34a;
+      --error: #dc2626;
+      --shadow-light: 0 4px 12px -2px rgba(45, 95, 47, 0.15);
+      --shadow-medium: 0 12px 24px -4px rgba(45, 95, 47, 0.2);
+      --shadow-heavy: 0 25px 50px -12px rgba(45, 95, 47, 0.3);
+      --border-radius: 20px;
       --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      --gradient-primary: linear-gradient(135deg, #16a91b 0%, #4a7c59 50%, #148a3a 100%);
+      --gradient-secondary: linear-gradient(135deg, #a8d5ba 0%, #c8e6d0 50%, #e8f5ea 100%);
     }
 
     * {
@@ -34,10 +37,27 @@
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f0fdfa 0%, #ecfdf5 50%, #f0f9ff 100%);
+      background: linear-gradient(135deg, #f0f9f0 0%, #e8f5e8 30%, #f5f8f5 70%, #fffef8 100%);
+      background-attachment: fixed;
       min-height: 100vh;
-      padding: 0;
+      padding: 20px 0;
       overflow-x: hidden;
+    }
+
+    /* Animated background elements */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(168, 213, 186, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(45, 95, 47, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     /* Loading Screen */
@@ -47,7 +67,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+      background: var(--gradient-primary);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -66,13 +86,13 @@
     }
 
     .loading-spinner {
-      width: 60px;
-      height: 60px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
+      width: 70px;
+      height: 70px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       border-top-color: var(--accent-gold);
-      animation: spin 1s ease-in-out infinite;
-      margin: 0 auto 20px;
+      animation: spin 1.2s ease-in-out infinite;
+      margin: 0 auto 30px;
     }
 
     @keyframes spin {
@@ -80,9 +100,10 @@
     }
 
     .loading-text {
-      font-size: 1.25rem;
-      font-weight: 500;
+      font-size: 1.4rem;
+      font-weight: 600;
       animation: pulse 2s ease-in-out infinite;
+      letter-spacing: 0.5px;
     }
 
     @keyframes pulse {
@@ -93,15 +114,15 @@
     .main-container {
       max-width: 1400px;
       margin: 0 auto;
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
       border-radius: var(--border-radius);
       box-shadow: var(--shadow-heavy);
       overflow: hidden;
       opacity: 0;
-      transform: translateY(30px);
-      animation: slideInUp 0.8s ease-out 0.5s forwards;
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: translateY(50px);
+      animation: slideInUp 1s ease-out 0.5s forwards;
+      backdrop-filter: blur(15px);
+      border: 2px solid rgba(168, 213, 186, 0.3);
     }
 
     @keyframes slideInUp {
@@ -113,9 +134,9 @@
 
     /* Header Styles */
     .header {
-      background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+      background: var(--gradient-primary);
       color: white;
-      padding: 40px;
+      padding: 50px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -128,8 +149,8 @@
       left: -50%;
       width: 200%;
       height: 200%;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
-      animation: float 30s linear infinite;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="agricultural" width="40" height="40" patternUnits="userSpaceOnUse"><g fill="rgba(255,255,255,0.1)"><circle cx="10" cy="10" r="2"/><path d="M20 15 L25 10 L30 15 L25 20 Z"/><circle cx="35" cy="30" r="1.5"/></g></pattern></defs><rect width="100" height="100" fill="url(%23agricultural)"/></svg>');
+      animation: float 40s linear infinite;
     }
 
     @keyframes float {
@@ -143,28 +164,35 @@
     }
 
     .header h1 {
-      font-size: 3rem;
+      font-size: 3.5rem;
       font-weight: 700;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
       letter-spacing: -0.025em;
-      animation: fadeInDown 0.8s ease-out 0.7s both;
+      animation: fadeInDown 1s ease-out 0.7s both;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
     .header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
+      font-size: 1.3rem;
+      opacity: 0.95;
       font-weight: 400;
-      animation: fadeInDown 0.8s ease-out 0.9s both;
+      animation: fadeInDown 1s ease-out 0.9s both;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
     }
 
-    .header i {
+    .header-icon {
+      font-size: 1.8rem;
+      margin-right: 15px;
       animation: bounce 2s ease-in-out infinite;
+      color: var(--accent-gold);
     }
 
     @keyframes fadeInDown {
       from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-30px);
       }
       to {
         opacity: 1;
@@ -174,22 +202,22 @@
 
     @keyframes bounce {
       0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-      60% { transform: translateY(-5px); }
+      40% { transform: translateY(-15px); }
+      60% { transform: translateY(-8px); }
     }
 
     /* Progress Indicator */
     .progress-container {
-      background: var(--light-gray);
-      padding: 30px;
-      border-bottom: 1px solid #e5e7eb;
+      background: var(--gradient-secondary);
+      padding: 40px;
+      border-bottom: 2px solid rgba(168, 213, 186, 0.3);
     }
 
     .progress-steps {
       display: flex;
       justify-content: center;
       align-items: center;
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
       position: relative;
     }
@@ -199,8 +227,8 @@
       top: 50%;
       left: 0;
       right: 0;
-      height: 3px;
-      background: #e5e7eb;
+      height: 4px;
+      background: rgba(45, 95, 47, 0.2);
       border-radius: 10px;
       transform: translateY(-50%);
       z-index: 1;
@@ -210,13 +238,14 @@
       position: absolute;
       top: 50%;
       left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--primary-green), var(--secondary-green));
+      height: 4px;
+      background: var(--gradient-primary);
       border-radius: 10px;
       transform: translateY(-50%);
       z-index: 2;
-      transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
       width: 0;
+      box-shadow: 0 0 10px rgba(45, 95, 47, 0.4);
     }
 
     .step-item {
@@ -225,39 +254,42 @@
       align-items: center;
       position: relative;
       z-index: 3;
-      background: var(--light-gray);
-      padding: 0 20px;
+      background: var(--gradient-secondary);
+      padding: 0 30px;
     }
 
     .step-circle {
-      width: 50px;
-      height: 50px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: white;
-      border: 3px solid #e5e7eb;
+      border: 4px solid rgba(45, 95, 47, 0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 600;
-      font-size: 1.1rem;
-      color: #6b7280;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--primary-green);
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow-light);
     }
 
     .step-circle.active {
       border-color: var(--primary-green);
       color: var(--primary-green);
-      transform: scale(1.1);
+      transform: scale(1.15);
       box-shadow: var(--shadow-medium);
+      background: linear-gradient(135deg, white 0%, #f0f9f0 100%);
     }
 
     .step-circle.completed {
-      background: var(--success);
-      border-color: var(--success);
+      background: var(--gradient-primary);
+      border-color: var(--primary-green);
       color: white;
-      transform: scale(1.05);
+      transform: scale(1.1);
+      box-shadow: var(--shadow-medium);
     }
 
     .step-circle::before {
@@ -280,30 +312,32 @@
     }
 
     .step-title {
-      margin-top: 15px;
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: #6b7280;
+      margin-top: 20px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--primary-green);
       transition: var(--transition);
       text-align: center;
     }
 
     .step-item.active .step-title {
-      color: var(--primary-green);
-      font-weight: 600;
+      color: var(--dark-green);
+      font-weight: 700;
+      text-shadow: 1px 1px 2px rgba(45, 95, 47, 0.1);
     }
 
     /* Form Container */
     .form-wrapper {
       position: relative;
       overflow: hidden;
+      min-height: 750px;
     }
 
     .form-step {
       display: flex;
-      min-height: 700px;
+      min-height: 750px;
       transform: translateX(0);
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .form-step.slide-out-left {
@@ -316,20 +350,21 @@
 
     .form-content {
       flex: 1;
-      padding: 50px;
+      padding: 60px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(248,252,248,0.95) 100%);
     }
 
     .media-section {
       flex: 1;
       position: relative;
-      background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+      background: var(--gradient-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      
+      overflow: hidden;
     }
 
     .video-wrapper {
@@ -344,7 +379,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      
+      filter: brightness(0.7) contrast(1.1);
     }
 
     .media-overlay {
@@ -353,7 +388,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      /* background: linear-gradient(135deg, rgba(15, 118, 110, 0.8) 0%, rgba(20, 184, 166, 0.6) 100%); */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -362,16 +396,16 @@
 
     .media-content {
       text-align: center;
-      color: rgb(255, 255, 255);
-      max-width: 400px;
-      padding: 30px;
-      animation: fadeInScale 1s ease-out 0.3s both;
+      color: white;
+      max-width: 450px;
+      padding: 40px;
+      animation: fadeInScale 1.2s ease-out 0.3s both;
     }
 
     @keyframes fadeInScale {
       from {
         opacity: 0;
-        transform: scale(0.9) translateY(20px);
+        transform: scale(0.9) translateY(30px);
       }
       to {
         opacity: 1;
@@ -380,57 +414,82 @@
     }
 
     .media-content i {
-      font-size: 4rem;
-      margin-bottom: 25px;
-      animation: glow 2s ease-in-out infinite alternate;
+      font-size: 5rem;
+      margin-bottom: 30px;
+      animation: glow 3s ease-in-out infinite alternate;
+      color: var(--accent-gold);
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 20px rgba(245, 158, 11, 0.5); }
-      to { text-shadow: 0 0 30px rgba(245, 158, 11, 0.8); }
+      from { text-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.4); }
+      to { text-shadow: 0 0 30px rgba(212, 175, 55, 0.8), 0 0 60px rgba(212, 175, 55, 0.6); }
     }
 
     .media-content h3 {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 15px;
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 20px;
       letter-spacing: -0.025em;
+      line-height: 1.2;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
 
     .media-content p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      line-height: 1.6;
+      font-size: 1.2rem;
+      opacity: 0.95;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    /* Agricultural decorative elements */
+    .media-content::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      border: 2px dashed rgba(212, 175, 55, 0.3);
+      border-radius: 20px;
+      z-index: -1;
+      animation: rotateBorder 20s linear infinite;
+    }
+
+    @keyframes rotateBorder {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     /* Form Elements */
     .section-title {
       color: var(--primary-green);
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 35px;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 40px;
       display: flex;
       align-items: center;
       letter-spacing: -0.025em;
-      animation: slideInLeft 0.6s ease-out;
+      animation: slideInLeft 0.8s ease-out;
+      text-shadow: 1px 1px 2px rgba(45, 95, 47, 0.1);
     }
 
     .section-title i {
-      margin-right: 15px;
+      margin-right: 20px;
       color: var(--accent-gold);
-      animation: bounceIn 0.8s ease-out 0.3s both;
+      animation: bounceIn 1s ease-out 0.3s both;
+      font-size: 2rem;
     }
 
     @keyframes bounceIn {
       0% { transform: scale(0); opacity: 0; }
-      50% { transform: scale(1.2); }
+      50% { transform: scale(1.3); }
       100% { transform: scale(1); opacity: 1; }
     }
 
     @keyframes slideInLeft {
       from {
         opacity: 0;
-        transform: translateX(-30px);
+        transform: translateX(-40px);
       }
       to {
         opacity: 1;
@@ -439,8 +498,8 @@
     }
 
     .form-group {
-      margin-bottom: 25px;
-      animation: slideInUp 0.6s ease-out;
+      margin-bottom: 30px;
+      animation: slideInUp 0.8s ease-out;
       animation-fill-mode: both;
     }
 
@@ -448,11 +507,12 @@
     .form-group:nth-child(3) { animation-delay: 0.2s; }
     .form-group:nth-child(4) { animation-delay: 0.3s; }
     .form-group:nth-child(5) { animation-delay: 0.4s; }
+    .form-group:nth-child(6) { animation-delay: 0.5s; }
 
     @keyframes slideInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
       }
       to {
         opacity: 1;
@@ -461,51 +521,55 @@
     }
 
     .form-label {
-      font-weight: 600;
-      color: var(--dark-gray);
-      margin-bottom: 8px;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
-      font-size: 0.95rem;
+      font-size: 1rem;
       letter-spacing: 0.025em;
     }
 
     .form-label i {
-      margin-right: 10px;
+      margin-right: 12px;
       color: var(--accent-gold);
-      width: 16px;
+      width: 18px;
+      font-size: 1.1rem;
     }
 
     .form-control, .form-select {
-      border: 2px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 15px 20px;
-      font-size: 1rem;
-      font-weight: 400;
+      border: 3px solid rgba(168, 213, 186, 0.4);
+      border-radius: 15px;
+      padding: 18px 25px;
+      font-size: 1.1rem;
+      font-weight: 500;
       transition: var(--transition);
-      background: white;
+      background: rgba(255, 255, 255, 0.9);
       box-shadow: var(--shadow-light);
+      color: var(--dark-green);
     }
 
     .form-control:focus, .form-select:focus {
       border-color: var(--primary-green);
-      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1), var(--shadow-medium);
-      transform: translateY(-2px);
+      box-shadow: 0 0 0 4px rgba(45, 95, 47, 0.15), var(--shadow-medium);
+      transform: translateY(-3px);
       outline: none;
+      background: white;
     }
 
     .form-control:hover, .form-select:hover {
       border-color: var(--secondary-green);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-medium);
     }
 
     /* File Upload */
     .file-upload-area {
-      border: 2px dashed #d1d5db;
-      border-radius: 12px;
-      padding: 30px;
+      border: 3px dashed rgba(45, 95, 47, 0.3);
+      border-radius: 15px;
+      padding: 40px;
       text-align: center;
-      background: #f9fafb;
+      background: linear-gradient(135deg, rgba(168, 213, 186, 0.1) 0%, rgba(255, 255, 255, 0.8) 100%);
       transition: var(--transition);
       cursor: pointer;
       position: relative;
@@ -514,14 +578,14 @@
 
     .file-upload-area:hover {
       border-color: var(--primary-green);
-      background: #f0fdfa;
-      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(168, 213, 186, 0.2) 0%, rgba(255, 255, 255, 0.9) 100%);
+      transform: translateY(-3px);
       box-shadow: var(--shadow-medium);
     }
 
     .file-upload-area.drag-over {
       border-color: var(--secondary-green);
-      background: var(--light-green);
+      background: linear-gradient(135deg, rgba(168, 213, 186, 0.3) 0%, rgba(255, 255, 255, 1) 100%);
       transform: scale(1.02);
     }
 
@@ -534,45 +598,49 @@
     }
 
     .upload-icon {
-      font-size: 2.5rem;
+      font-size: 3rem;
       color: var(--primary-green);
-      margin-bottom: 15px;
-      animation: uploadFloat 2s ease-in-out infinite;
+      margin-bottom: 20px;
+      animation: uploadFloat 3s ease-in-out infinite;
     }
 
     @keyframes uploadFloat {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+      50% { transform: translateY(-8px); }
     }
 
     .upload-text {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--dark-gray);
-      margin-bottom: 5px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark-green);
+      margin-bottom: 8px;
     }
 
     .upload-hint {
-      font-size: 0.85rem;
-      color: #6b7280;
+      font-size: 0.9rem;
+      color: var(--primary-green);
+      opacity: 0.8;
     }
 
     /* Buttons */
     .btn-primary-custom {
-      background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+      background: var(--gradient-primary);
       border: none;
       color: white;
-      padding: 15px 35px;
+      padding: 18px 40px;
       border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
       transition: var(--transition);
       box-shadow: var(--shadow-medium);
       position: relative;
       overflow: hidden;
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-left: 10px;
     }
 
     .btn-primary-custom::before {
@@ -582,8 +650,8 @@
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s;
     }
 
     .btn-primary-custom:hover::before {
@@ -591,30 +659,32 @@
     }
 
     .btn-primary-custom:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       box-shadow: var(--shadow-heavy);
-      background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+      background: linear-gradient(135deg, #4a7c59 0%, #2d5f2f 50%, #1a3a1c 100%);
     }
 
     .btn-secondary-custom {
       background: white;
-      border: 2px solid var(--primary-green);
+      border: 3px solid var(--primary-green);
       color: var(--primary-green);
-      padding: 15px 35px;
+      padding: 18px 40px;
       border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.1rem;
+      font-weight: 700;
+      font-size: 1.2rem;
       transition: var(--transition);
       box-shadow: var(--shadow-light);
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
     }
 
     .btn-secondary-custom:hover {
       background: var(--primary-green);
       color: white;
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       box-shadow: var(--shadow-medium);
     }
 
@@ -628,15 +698,15 @@
 
     .custom-toast {
       background: white;
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 15px;
+      padding: 25px;
       box-shadow: var(--shadow-heavy);
-      border-left: 5px solid var(--success);
-      min-width: 350px;
-      animation: slideInRight 0.5s ease-out, fadeOut 0.5s ease-out 4s forwards;
+      border-left: 6px solid var(--success);
+      min-width: 400px;
+      animation: slideInRight 0.6s ease-out, fadeOut 0.6s ease-out 4.5s forwards;
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 20px;
     }
 
     .custom-toast.error {
@@ -644,7 +714,7 @@
     }
 
     .toast-icon {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       color: var(--success);
     }
 
@@ -657,14 +727,15 @@
     }
 
     .toast-title {
-      font-weight: 600;
-      color: var(--dark-gray);
-      margin-bottom: 3px;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 5px;
+      font-size: 1.1rem;
     }
 
     .toast-message {
       color: #6b7280;
-      font-size: 0.9rem;
+      font-size: 1rem;
     }
 
     @keyframes slideInRight {
@@ -687,29 +758,30 @@
 
     /* Footer */
     .footer-section {
-      background: var(--light-gray);
-      padding: 30px;
+      background: var(--gradient-secondary);
+      padding: 40px;
       text-align: center;
-      border-top: 1px solid #e5e7eb;
+      border-top: 2px solid rgba(168, 213, 186, 0.3);
     }
 
     .footer-section a {
       color: var(--primary-green);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       transition: var(--transition);
       position: relative;
+      font-size: 1.1rem;
     }
 
     .footer-section a::after {
       content: '';
       position: absolute;
-      bottom: -2px;
+      bottom: -3px;
       left: 0;
       width: 0;
-      height: 2px;
-      background: var(--primary-green);
-      transition: width 0.3s ease;
+      height: 3px;
+      background: var(--accent-gold);
+      transition: width 0.4s ease;
     }
 
     .footer-section a:hover::after {
@@ -717,14 +789,25 @@
     }
 
     .footer-section a:hover {
-      color: var(--secondary-green);
+      color: var(--dark-green);
+    }
+
+    /* Password Strength Indicator */
+    .progress-bar.weak { 
+      background: linear-gradient(90deg, #dc2626 0%, #ef4444 100%);
+    }
+    .progress-bar.medium { 
+      background: linear-gradient(90deg, #f59e0b 0%, #fbbf24 100%);
+    }
+    .progress-bar.strong { 
+      background: linear-gradient(90deg, #16a34a 0%, #22c55e 100%);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
       .main-container {
-        margin: 0;
-        border-radius: 0;
+        margin: 10px;
+        border-radius: 15px;
       }
       
       .form-step {
@@ -733,28 +816,46 @@
       }
       
       .media-section {
-        min-height: 300px;
+        min-height: 350px;
+        order: -1;
       }
       
       .form-content {
-        padding: 30px 20px;
+        padding: 40px 25px;
+      }
+      
+      .header {
+        padding: 40px 25px;
       }
       
       .header h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
       
       .section-title {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
       }
       
       .progress-steps {
         flex-direction: column;
-        gap: 20px;
+        gap: 25px;
       }
       
       .progress-line, .progress-line-active {
         display: none;
+      }
+
+      .media-content {
+        padding: 25px;
+        max-width: 350px;
+      }
+
+      .media-content h3 {
+        font-size: 2.2rem;
+      }
+
+      .media-content i {
+        font-size: 4rem;
       }
     }
 
@@ -766,21 +867,18 @@
     /* Button loading state */
     .btn-loading {
       pointer-events: none;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     .btn-loading .spinner {
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       border-top-color: white;
-      animation: spin 1s linear infinite;
-      margin-right: 10px;
+      animation: spin 1.2s linear infinite;
+      margin-right: 12px;
     }
-    .progress-bar.weak { background-color: #dc3545; }     /* red */
-  .progress-bar.medium { background-color: #ffc107; }   /* yellow */
-  .progress-bar.strong { background-color: #28a745; }
   </style>
 </head>
 <body>
@@ -799,8 +897,11 @@
     <!-- Header -->
     <div class="header">
       <div class="header-content">
-        <h1><i class="fas fa-seedling"></i> Kisan Mitra</h1>
-        <p>Empowering Farmers Through Advanced Technology Solutions</p>
+        <h1>
+          <i class="fas fa-seedling header-icon"></i>
+          Kisan Mitra
+        </h1>
+        <p>Empowering Farmers Through Advanced Agricultural Technology Solutions and Smart Farming Practices</p>
       </div>
     </div>
 
@@ -833,7 +934,7 @@
         <div id="step1" class="form-step">
           <div class="form-content">
             <h2 class="section-title">
-              <i class="fas fa-user"></i>
+              <i class="fas fa-user-circle"></i>
               Personal Information
             </h2>
             
@@ -861,23 +962,23 @@
               <input type="text" name="aadhaar" class="form-control" placeholder="XXXX-XXXX-XXXX" required>
             </div>
 
-            <!-- Mobile Number Field -->
             <div class="form-group">
               <label class="form-label">
-                <i class="fas fa-phone-alt"></i> Mobile Number
+                <i class="fas fa-phone-alt"></i> 
+                Mobile Number
               </label>
               <input type="tel" name="mobile" id="mobile" class="form-control" placeholder="Enter 10-digit mobile number"
                 pattern="^[0-9]{10}$" maxlength="10" title="Mobile number must be exactly 10 digits" required>
             </div>
             
-            <!-- Email ID Field -->
             <div class="form-group">
               <label class="form-label">
-                <i class="fas fa-envelope"></i> Email ID
+                <i class="fas fa-envelope"></i> 
+                Email ID
               </label>
               <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email address"
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                title="Enter a valid email address (e.g., example@gmail.com)" required>
+                title="Enter a valid email address" required>
             </div>
 
             <div class="form-group">
@@ -887,17 +988,17 @@
               </label>
               <input type="password" name="password" class="form-control" id="passwordInput" placeholder="Minimum 8 characters"
                 required oninput="checkPasswordStrength()">
-              <small class="text-muted mt-1">Must contain at least 8 characters with one number</small>
+              <small class="text-muted mt-1">Must contain at least 8 characters with one number and one letter</small>
             
-              <div class="progress mt-2" style="height: 8px;">
+              <div class="progress mt-2" style="height: 10px; border-radius: 10px; overflow: hidden;">
                 <div id="passwordStrengthBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0"
                   aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <small id="strengthText" class="form-text text-muted"></small>
+              <small id="strengthText" class="form-text text-muted mt-1"></small>
             </div>
 
             <button type="button" class="btn-primary-custom" onclick="nextStep()">
-              <span>Continue</span>
+              <span>Continue to Next Step</span>
               <i class="fas fa-arrow-right"></i>
             </button>
           </div>
@@ -905,69 +1006,43 @@
           <div class="media-section">
             <div class="video-wrapper">
               <video autoplay muted loop playsinline class="bg-video">
-                <source src="/backend/Guaranteed Return Plan with Life Cover SBI Life.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2024/05/05/210766_tiny.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2021/08/21/85898-591840759_tiny.mp4" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
             </div>
             <div class="media-overlay">
               <div class="media-content">
-                <i class="fas fa-user-circle"></i>
-                <h3>Join Our Community</h3>
-                <p>Create your farmer profile with secure, encrypted data protection. Your information helps us provide personalized agricultural solutions.</p>
+                <i class="fas fa-users"></i>
+                <h3>Join Our Farming Community</h3>
+                <p>Connect with thousands of progressive farmers using modern technology to increase crop yield, reduce costs, and build sustainable agricultural practices for future generations.</p>
               </div>
             </div>
           </div>
         </div>
 
-        <script>
-          function checkPasswordStrength() {
-            const password = document.getElementById("passwordInput").value;
-            const strengthBar = document.getElementById("passwordStrengthBar");
-            const strengthText = document.getElementById("strengthText");
-
-            let strength = 0;
-
-            if (password.length >= 8) strength += 1;
-            if (/[0-9]/.test(password)) strength += 1;
-            if (/[A-Z]/.test(password)) strength += 1;
-            if (/[\W_]/.test(password)) strength += 1;
-
-            switch (strength) {
-              case 0:
-                strengthBar.style.width = "0%";
-                strengthBar.className = "progress-bar";
-                strengthText.textContent = "";
-                break;
-              case 1:
-                strengthBar.style.width = "25%";
-                strengthBar.className = "progress-bar weak";
-                strengthText.textContent = "Weak";
-                break;
-              case 2:
-                strengthBar.style.width = "50%";
-                strengthBar.className = "progress-bar medium";
-                strengthText.textContent = "Medium";
-                break;
-              case 3:
-                strengthBar.style.width = "75%";
-                strengthBar.className = "progress-bar medium";
-                strengthText.textContent = "Strong";
-                break;
-              case 4:
-                strengthBar.style.width = "100%";
-                strengthBar.className = "progress-bar strong";
-                strengthText.textContent = "Very Strong";
-                break;
-            }
-          }
-        </script>
-
-
         <!-- Step 2 -->
         <div id="step2" class="form-step hidden">
+          <div class="media-section">
+            <div class="video-wrapper">
+              <video autoplay muted loop playsinline class="bg-video">
+                <source src="https://cdn.pixabay.com/video/2023/05/18/163560-828200792_tiny.mp4" type="video/mp4">
+                <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <div class="media-overlay">
+              <div class="media-content">
+                <i class="fas fa-shield-check"></i>
+                <h3>Secure Document Verification</h3>
+                <p>Your documents are protected with advanced encryption and stored securely. We verify your land ownership and banking details to provide personalized agricultural loans and subsidies.</p>
+              </div>
+            </div>
+          </div>
+
           <div class="form-content">
             <h2 class="section-title">
-              <i class="fas fa-map-marker-alt"></i>
+              <i class="fas fa-map-marked-alt"></i>
               Address & Documents
             </h2>
             
@@ -990,7 +1065,7 @@
             <div class="row">
               <div class="col-md-4 form-group">
                 <label class="form-label">
-                  <i class="fas fa-map-marker-alt"></i>
+                  <i class="fas fa-flag"></i>
                   State
                 </label>
                 <select name="state" id="state" class="form-select" required>
@@ -1016,37 +1091,6 @@
                   <option value="">Select District</option>
                 </select>
               </div>
-              
-              <script>
-                const districtsByState = {
-                  "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur"],
-                  "Karnataka": ["Bengaluru", "Mysuru", "Mangaluru"],
-                  "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode"],
-                  "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai"],
-                  "Maharashtra": ["Mumbai", "Pune", "Nagpur"],
-                  "Punjab": ["Amritsar", "Ludhiana", "Jalandhar"],
-                  "Haryana": ["Gurugram", "Faridabad", "Panipat"],
-                  "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi"],
-                  "Odisha": ["Bhubaneswar", "Cuttack", "Puri"]
-                };
-
-                const stateSelect = document.getElementById("state");
-                const districtSelect = document.getElementById("district");
-
-                stateSelect.addEventListener("change", function () {
-                  const selectedState = this.value;
-                  districtSelect.innerHTML = '<option value="">Select District</option>';
-
-                  if (districtsByState[selectedState]) {
-                    districtsByState[selectedState].forEach(function (district) {
-                      const option = document.createElement("option");
-                      option.value = district;
-                      option.textContent = district;
-                      districtSelect.appendChild(option);
-                    });
-                  }
-                });
-              </script>
 
               <div class="col-md-4 form-group">
                 <label class="form-label">
@@ -1056,11 +1100,11 @@
                 <input type="text" name="pincode" class="form-control" placeholder="6-digit pincode" pattern="[0-9]{6}" maxlength="6"
                   minlength="6" title="Please enter exactly 6 digits" required>
               </div>
-
             </div>
 
-            <h4 style="color: var(--primary-green); margin: 40px 0 25px 0; font-weight: 600;">
-              <i class="fas fa-cloud-upload-alt"></i> Upload Required Documents
+            <h4 style="color: var(--primary-green); margin: 50px 0 30px 0; font-weight: 700; display: flex; align-items: center;">
+              <i class="fas fa-cloud-upload-alt" style="margin-right: 15px; color: var(--accent-gold);"></i> 
+              Upload Required Documents
             </h4>
             
             <div class="row">
@@ -1130,28 +1174,12 @@
             <div class="d-flex justify-content-between align-items-center mt-5">
               <button type="button" class="btn-secondary-custom" onclick="prevStep()">
                 <i class="fas fa-arrow-left"></i>
-                <span>Back</span>
+                <span>Back to Previous</span>
               </button>
               <button type="submit" class="btn-primary-custom">
                 <span>Complete Registration</span>
                 <i class="fas fa-check-circle"></i>
               </button>
-            </div>
-          </div>
-          
-          <div class="media-section">
-            <div class="video-wrapper">
-              <video autoplay muted loop playsinline class="bg-video">
-                <source src="/backend/Guaranteed Return Plan with Life Cover SBI Life.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div class="media-overlay">
-              <div class="media-content">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Secure Document Storage</h3>
-                <p>Your documents are encrypted and stored securely with bank-level security protocols. Access personalized farming solutions based on your land data.</p>
-              </div>
             </div>
           </div>
         </div>
@@ -1161,7 +1189,7 @@
     <!-- Footer -->
     <div class="footer-section">
       <p>Already have an account? <a href="/frontend/forms/login.html">Login Here</a></p>
-      <p class="mt-2 text-muted">© 2025 Kisan Mitra. Empowering farmers with technology.</p>
+      <p class="mt-3" style="color: var(--primary-green); font-weight: 500;">© 2025 Kisan Mitra. Empowering farmers with modern agricultural technology.</p>
     </div>
   </div>
 
@@ -1169,15 +1197,13 @@
   <script>
     // Initialize page
     document.addEventListener('DOMContentLoaded', function() {
-      // Hide loading screen after delay
       setTimeout(() => {
         document.getElementById('loadingScreen').classList.add('fade-out');
         setTimeout(() => {
           document.getElementById('loadingScreen').style.display = 'none';
-        }, 500);
-      }, 1500);
+        }, 600);
+      }, 1800);
 
-      // Initialize form enhancements
       initializeFormEnhancements();
     });
 
@@ -1196,18 +1222,71 @@
           <div class="toast-title">${toastTitle}</div>
           <div class="toast-message">${message}</div>
         </div>
-        <button class="btn-close" onclick="this.parentElement.remove()">×</button>
+        <button class="btn-close" onclick="this.parentElement.remove()" style="background: none; border: none; font-size: 1.5rem; color: #6b7280; cursor: pointer;">×</button>
       `;
       
       toastContainer.appendChild(toast);
       
-      // Auto remove after 5 seconds
       setTimeout(() => {
         if (toast.parentElement) {
-          toast.style.animation = 'fadeOut 0.5s ease-out forwards';
-          setTimeout(() => toast.remove(), 500);
+          toast.style.animation = 'fadeOut 0.6s ease-out forwards';
+          setTimeout(() => toast.remove(), 600);
         }
-      }, 5000);
+      }, 5500);
+    }
+
+    // Password strength checker
+    function checkPasswordStrength() {
+      const password = document.getElementById("passwordInput").value;
+      const strengthBar = document.getElementById("passwordStrengthBar");
+      const strengthText = document.getElementById("strengthText");
+
+      let strength = 0;
+      let feedback = [];
+
+      if (password.length >= 8) {
+        strength += 1;
+      } else if (password.length > 0) {
+        feedback.push("At least 8 characters");
+      }
+
+      if (/[0-9]/.test(password)) {
+        strength += 1;
+      } else if (password.length > 0) {
+        feedback.push("One number");
+      }
+
+      if (/[A-Z]/.test(password)) strength += 1;
+      if (/[a-z]/.test(password)) strength += 1;
+      if (/[\W_]/.test(password)) strength += 1;
+
+      switch (Math.min(strength, 4)) {
+        case 0:
+          strengthBar.style.width = "0%";
+          strengthBar.className = "progress-bar";
+          strengthText.textContent = "";
+          break;
+        case 1:
+          strengthBar.style.width = "25%";
+          strengthBar.className = "progress-bar weak";
+          strengthText.textContent = "Weak - " + feedback.join(", ");
+          break;
+        case 2:
+          strengthBar.style.width = "50%";
+          strengthBar.className = "progress-bar medium";
+          strengthText.textContent = "Medium - Add special characters";
+          break;
+        case 3:
+          strengthBar.style.width = "75%";
+          strengthBar.className = "progress-bar strong";
+          strengthText.textContent = "Strong password";
+          break;
+        case 4:
+          strengthBar.style.width = "100%";
+          strengthBar.className = "progress-bar strong";
+          strengthText.textContent = "Very Strong password";
+          break;
+      }
     }
 
     // Form validation utilities
@@ -1231,6 +1310,20 @@
         const cleaned = value.replace(/\D/g, '');
         if (!cleaned) return 'Aadhaar number is required';
         if (cleaned.length !== 12) return 'Aadhaar must be exactly 12 digits';
+        return null;
+      },
+      
+      mobile: (value) => {
+        const cleaned = value.replace(/\D/g, '');
+        if (!cleaned) return 'Mobile number is required';
+        if (cleaned.length !== 10) return 'Mobile number must be exactly 10 digits';
+        return null;
+      },
+
+      email: (value) => {
+        if (!value) return 'Email is required';
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(value)) return 'Please enter a valid email address';
         return null;
       },
       
@@ -1272,19 +1365,22 @@
       
       if (error) {
         field.style.borderColor = 'var(--error)';
+        field.style.boxShadow = '0 0 0 3px rgba(220, 38, 38, 0.1)';
         const errorDiv = document.createElement('div');
-        errorDiv.className = 'field-error text-danger mt-1';
-        errorDiv.style.fontSize = '0.875rem';
+        errorDiv.className = 'field-error mt-1';
+        errorDiv.style.fontSize = '0.9rem';
+        errorDiv.style.color = 'var(--error)';
+        errorDiv.style.fontWeight = '500';
         errorDiv.textContent = error;
         field.parentNode.appendChild(errorDiv);
       } else {
         field.style.borderColor = 'var(--success)';
+        field.style.boxShadow = '0 0 0 3px rgba(22, 163, 74, 0.1)';
       }
     }
 
     // Initialize form enhancements
     function initializeFormEnhancements() {
-      // Add real-time validation
       const fields = document.querySelectorAll('input[required], select[required]');
       fields.forEach(field => {
         field.addEventListener('blur', () => validateField(field));
@@ -1302,10 +1398,46 @@
         this.value = value.replace(/(\d{4})(\d{4})(\d{4})/, '$1-$2-$3');
       });
 
+      // Format mobile input
+      const mobileInput = document.querySelector('input[name="mobile"]');
+      mobileInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/\D/g, '').slice(0, 10);
+      });
+
       // Format pincode input
       const pincodeInput = document.querySelector('input[name="pincode"]');
       pincodeInput.addEventListener('input', function(e) {
         this.value = this.value.replace(/\D/g, '').slice(0, 6);
+      });
+
+      // State-District dropdown
+      const districtsByState = {
+        "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Tirupati", "Kakinada"],
+        "Karnataka": ["Bengaluru", "Mysuru", "Mangaluru", "Hubli", "Belagavi"],
+        "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kollam"],
+        "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Salem", "Tiruchirappalli"],
+        "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"],
+        "Punjab": ["Amritsar", "Ludhiana", "Jalandhar", "Patiala", "Bathinda"],
+        "Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Karnal"],
+        "Uttar Pradesh": ["Lucknow", "Kanpur", "Varanasi", "Agra", "Meerut"],
+        "Odisha": ["Bhubaneswar", "Cuttack", "Puri", "Berhampur", "Sambalpur"]
+      };
+
+      const stateSelect = document.getElementById("state");
+      const districtSelect = document.getElementById("district");
+
+      stateSelect.addEventListener("change", function () {
+        const selectedState = this.value;
+        districtSelect.innerHTML = '<option value="">Select District</option>';
+
+        if (districtsByState[selectedState]) {
+          districtsByState[selectedState].forEach(function (district) {
+            const option = document.createElement("option");
+            option.value = district;
+            option.textContent = district;
+            districtSelect.appendChild(option);
+          });
+        }
       });
 
       // File upload enhancements
@@ -1326,7 +1458,7 @@
       const uploadArea = e.target.closest('.file-upload-area');
       
       if (file) {
-        if (file.size > 5 * 1024 * 1024) { // 5MB limit
+        if (file.size > 5 * 1024 * 1024) {
           showToast('File size must be less than 5MB', 'error');
           e.target.value = '';
           return;
@@ -1368,7 +1500,7 @@
         icon.style.color = 'var(--success)';
         text.textContent = fileName;
         area.style.borderColor = 'var(--success)';
-        area.style.backgroundColor = '#f0fdf4';
+        area.style.backgroundColor = 'rgba(22, 163, 74, 0.1)';
       }
     }
 
@@ -1382,7 +1514,6 @@
       const stepIndicator1 = document.getElementById('stepIndicator1');
       const stepIndicator2 = document.getElementById('stepIndicator2');
       
-      // Animate step transition
       step1.style.transform = 'translateX(-100%)';
       step1.style.opacity = '0';
       
@@ -1396,16 +1527,15 @@
           step2.style.transform = 'translateX(0)';
           step2.style.opacity = '1';
         }, 50);
-      }, 300);
+      }, 400);
       
-      // Update progress
       progressLine.style.width = '100%';
       stepIndicator1.classList.remove('active');
       stepIndicator1.classList.add('completed');
       stepIndicator1.querySelector('.step-circle').innerHTML = '<i class="fas fa-check"></i>';
       stepIndicator2.classList.add('active');
       
-      showToast('Step 1 completed successfully!', 'success');
+      showToast('Personal information completed successfully!', 'success');
     }
 
     function prevStep() {
@@ -1415,7 +1545,6 @@
       const stepIndicator1 = document.getElementById('stepIndicator1');
       const stepIndicator2 = document.getElementById('stepIndicator2');
       
-      // Animate step transition
       step2.style.transform = 'translateX(100%)';
       step2.style.opacity = '0';
       
@@ -1429,9 +1558,8 @@
           step1.style.transform = 'translateX(0)';
           step1.style.opacity = '1';
         }, 50);
-      }, 300);
+      }, 400);
       
-      // Update progress
       progressLine.style.width = '0%';
       stepIndicator2.classList.remove('active');
       stepIndicator1.classList.remove('completed');
@@ -1441,7 +1569,7 @@
 
     // Validation functions
     function validateStep1() {
-      const fields = ['name', 'dob', 'aadhaar', 'password'];
+      const fields = ['name', 'dob', 'aadhaar', 'mobile', 'email', 'password'];
       let isValid = true;
       
       fields.forEach(fieldName => {
@@ -1463,7 +1591,6 @@
       const fileFields = ['aadhaarCard', 'ror', 'bankPassbook', 'profilePhoto'];
       let isValid = true;
       
-      // Validate text fields
       requiredFields.forEach(fieldName => {
         const field = document.querySelector(`[name="${fieldName}"]`);
         if (!field.value.trim()) {
@@ -1472,7 +1599,6 @@
         }
       });
       
-      // Validate file uploads
       fileFields.forEach(fieldName => {
         const field = document.querySelector(`input[name="${fieldName}"]`);
         if (!field.files || field.files.length === 0) {
@@ -1482,7 +1608,6 @@
         }
       });
       
-      // Validate pincode
       const pincodeField = document.querySelector('input[name="pincode"]');
       if (!validateField(pincodeField)) {
         isValid = false;
@@ -1504,21 +1629,20 @@
       const submitButton = document.querySelector('button[type="submit"]');
       const originalText = submitButton.innerHTML;
       
-      // ✅ Show success message first
-submitButton.innerHTML = `
-  <span class="text-success">Registered successfully!</span>
-`;
+      submitButton.innerHTML = `
+        <span class="text-success">Registered successfully!</span>
+        <i class="fas fa-check"></i>
+      `;
 
-// ⏳ Then after a short delay, show the loading spinner
-setTimeout(() => {
-  submitButton.classList.add('btn-loading');
-  submitButton.innerHTML = `
-    <div class="spinner"></div>
-    <span>Processing...</span>
-  `;
-}, 1000); 
+      setTimeout(() => {
+        submitButton.classList.add('btn-loading');
+        submitButton.innerHTML = `
+          <div class="spinner"></div>
+          <span>Processing Registration...</span>
+        `;
+      }, 1200); 
+      
       submitButton.disabled = true;
-      // https://kisan-mitra-backend.vercel.app/api/farmer/register
       
       try {
         const formData = new FormData(this);
@@ -1526,8 +1650,8 @@ setTimeout(() => {
         // Clean Aadhaar number
         const aadhaar = formData.get('aadhaar').replace(/\D/g, '');
         formData.set('aadhaar', aadhaar);
-        
-        const response = await fetch('https://kisan-mitra-backend.vercel.app/auth/register', {
+           
+        const response = await fetch('http://localhost:5000/auth/register', {
           method: 'POST',
           body: formData
         });
@@ -1541,16 +1665,14 @@ setTimeout(() => {
         
         showToast(result.message || 'Registration completed successfully!', 'success', 'Welcome to Kisan Mitra!');
         
-        // Redirect after delay
         setTimeout(() => {
           window.location.href = '/frontend/forms/login.html';
-        }, 2000);
+        }, 2500);
         
       } catch (error) {
         console.error('Error:', error);
         showToast(error.message || 'Registration failed. Please try again.', 'error');
       } finally {
-        // Restore button state
         submitButton.classList.remove('btn-loading');
         submitButton.innerHTML = originalText;
         submitButton.disabled = false;
@@ -1565,18 +1687,168 @@ setTimeout(() => {
       });
     }
 
-    // Call smooth scroll on step transitions
+    // Enhanced step transitions with smooth scroll
     const originalNextStep = nextStep;
     nextStep = function() {
       originalNextStep();
-      setTimeout(smoothScrollToTop, 350);
+      setTimeout(smoothScrollToTop, 450);
     };
 
     const originalPrevStep = prevStep;
     prevStep = function() {
       originalPrevStep();
-      setTimeout(smoothScrollToTop, 350);
+      setTimeout(smoothScrollToTop, 450);
     };
+
+    // Add some agricultural-themed animations
+    function addFloatingElements() {
+      const floatingElements = ['🌱', '🌾', '🚜', '🌿', '🍃'];
+      
+      setInterval(() => {
+        if (Math.random() > 0.7) {
+          const element = document.createElement('div');
+          element.textContent = floatingElements[Math.floor(Math.random() * floatingElements.length)];
+          element.style.cssText = `
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 1;
+            top: ${Math.random() * 100}vh;
+            left: -50px;
+            animation: floatAcross ${5 + Math.random() * 10}s linear forwards;
+          `;
+          
+          const style = document.createElement('style');
+          style.textContent = `
+            @keyframes floatAcross {
+              to {
+                transform: translateX(calc(100vw + 100px)) rotate(360deg);
+                opacity: 0;
+              }
+            }
+          `;
+          document.head.appendChild(style);
+          document.body.appendChild(element);
+          
+          setTimeout(() => {
+            element.remove();
+            style.remove();
+          }, 15000);
+        }
+      }, 3000);
+    }
+
+    // Initialize floating elements after page load
+    setTimeout(addFloatingElements, 3000);
+
+    // Add focus enhancement for better accessibility
+    document.querySelectorAll('input, select, button').forEach(element => {
+      element.addEventListener('focus', function() {
+        this.style.outline = '3px solid var(--accent-gold)';
+        this.style.outlineOffset = '2px';
+      });
+      
+      element.addEventListener('blur', function() {
+        this.style.outline = 'none';
+      });
+    });
+
+    // Add keyboard navigation support
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && e.ctrlKey) {
+        const currentStep = document.querySelector('.form-step:not(.hidden)');
+        if (currentStep.id === 'step1') {
+          nextStep();
+        } else if (currentStep.id === 'step2') {
+          document.getElementById('registrationForm').dispatchEvent(new Event('submit'));
+        }
+      }
+    });
+
+    // Add success confetti effect
+    function createConfetti() {
+      const colors = ['#2d5f2f', '#4a7c59', '#d4af37', '#a8d5ba'];
+      const confettiCount = 50;
+      
+      for (let i = 0; i < confettiCount; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.cssText = `
+          position: fixed;
+          width: 10px;
+          height: 10px;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          top: -10px;
+          left: ${Math.random() * 100}vw;
+          opacity: 0.8;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 10000;
+          animation: confettiFall ${2 + Math.random() * 3}s ease-out forwards;
+        `;
+        
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 5000);
+      }
+    }
+
+    // Add confetti animation
+    const confettiStyle = document.createElement('style');
+    confettiStyle.textContent = `
+      @keyframes confettiFall {
+        to {
+          transform: translateY(100vh) rotate(720deg);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(confettiStyle);
+
+    // Enhanced form submission with confetti
+    const originalFormSubmission = document.getElementById('registrationForm').onsubmit;
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+      setTimeout(() => {
+        if (!e.defaultPrevented) {
+          createConfetti();
+        }
+      }, 1500);
+    });
+
+    // Add progressive loading for better UX
+    let loadProgress = 0;
+    const loadingBar = document.createElement('div');
+    loadingBar.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--gradient-primary);
+      z-index: 10001;
+      transition: width 0.3s ease;
+    `;
+    document.body.appendChild(loadingBar);
+
+    function updateLoadingProgress(progress) {
+      loadingBar.style.width = progress + '%';
+      if (progress >= 100) {
+        setTimeout(() => {
+          loadingBar.style.opacity = '0';
+          setTimeout(() => loadingBar.remove(), 300);
+        }, 500);
+      }
+    }
+
+    // Simulate progressive loading
+    const progressInterval = setInterval(() => {
+      loadProgress += Math.random() * 30;
+      if (loadProgress >= 100) {
+        loadProgress = 100;
+        clearInterval(progressInterval);
+      }
+      updateLoadingProgress(loadProgress);
+    }, 200);
   </script>
 </body>
 </html>

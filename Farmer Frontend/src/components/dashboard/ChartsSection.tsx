@@ -35,13 +35,17 @@ const ChartsSection: React.FC = () => {
   const [selectedState, setSelectedState] = useState<string>('');
   const [mapData, setMapData] = useState<any>(null);
 
-  // Indian states agriculture data
+  // Enhanced Indian states agriculture data with all major states
   const stateWiseData = {
-    labels: ['Uttar Pradesh', 'Punjab', 'Maharashtra', 'Madhya Pradesh', 'Karnataka', 
-             'West Bengal', 'Gujarat', 'Rajasthan', 'Andhra Pradesh', 'Tamil Nadu'],
+    labels: [
+      'Uttar Pradesh', 'Punjab', 'Maharashtra', 'Madhya Pradesh', 'Karnataka',
+      'West Bengal', 'Gujarat', 'Rajasthan', 'Andhra Pradesh', 'Tamil Nadu',
+      'Bihar', 'Haryana', 'Odisha', 'Telangana', 'Assam',
+      'Chhattisgarh', 'Kerala', 'Jharkhand', 'Uttarakhand', 'Himachal Pradesh'
+    ],
     datasets: [{
       label: 'Food Grain Production (Million Tons)',
-      data: [58, 31, 26, 25, 15, 18, 14, 23, 21, 17],
+      data: [58, 31, 26, 25, 15, 18, 14, 23, 21, 17, 16, 19, 12, 14, 8, 9, 3, 6, 4, 2],
       backgroundColor: 'rgba(54, 162, 235, 0.7)',
       borderColor: 'rgba(54, 162, 235, 1)',
       borderWidth: 1
@@ -97,11 +101,14 @@ const ChartsSection: React.FC = () => {
 
   // Irrigation coverage
   const irrigationData = {
-    labels: ['Punjab', 'Haryana', 'Uttar Pradesh', 'Tamil Nadu', 'Andhra Pradesh', 
-             'Karnataka', 'Maharashtra', 'Gujarat', 'Rajasthan', 'Madhya Pradesh'],
+    labels: [
+      'Punjab', 'Haryana', 'Uttar Pradesh', 'Tamil Nadu', 'Andhra Pradesh',
+      'Karnataka', 'Maharashtra', 'Gujarat', 'Rajasthan', 'Madhya Pradesh',
+      'West Bengal', 'Bihar', 'Odisha', 'Telangana', 'Kerala'
+    ],
     datasets: [{
       label: 'Irrigation Coverage (%)',
-      data: [98, 85, 75, 65, 60, 55, 45, 40, 35, 30],
+      data: [98, 85, 75, 65, 60, 55, 45, 40, 35, 30, 70, 65, 50, 45, 80],
       backgroundColor: 'rgba(153, 102, 255, 0.7)',
       borderColor: 'rgba(153, 102, 255, 1)',
       borderWidth: 1
@@ -128,7 +135,87 @@ const ChartsSection: React.FC = () => {
     }]
   };
 
-  // India map data (simplified)
+  // Fertilizer Consumption by State
+  const fertilizerData = {
+    labels: [
+      'Uttar Pradesh', 'Punjab', 'Maharashtra', 'Andhra Pradesh', 'Madhya Pradesh',
+      'Karnataka', 'Gujarat', 'Rajasthan', 'West Bengal', 'Tamil Nadu',
+      'Bihar', 'Haryana', 'Odisha', 'Telangana'
+    ],
+    datasets: [
+      {
+        label: 'Nitrogen (kg/hectare)',
+        data: [180, 240, 120, 140, 110, 100, 130, 90, 150, 160, 170, 220, 80, 120],
+        backgroundColor: 'rgba(255, 99, 132, 0.7)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+      },
+      {
+        label: 'Phosphorus (kg/hectare)',
+        data: [80, 110, 60, 70, 50, 45, 65, 40, 75, 85, 70, 100, 35, 55],
+        backgroundColor: 'rgba(54, 162, 235, 0.7)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+      },
+      {
+        label: 'Potassium (kg/hectare)',
+        data: [40, 60, 30, 35, 25, 20, 30, 20, 40, 45, 35, 55, 15, 25],
+        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1,
+      }
+    ]
+  };
+
+  // NEW: Agricultural Exports Data
+  const exportsData = {
+    labels: ['Rice', 'Marine Products', 'Spices', 'Buffalo Meat', 'Sugar', 'Cotton', 'Tea'],
+    datasets: [{
+      label: 'Export Value (Billion USD)',
+      data: [11.5, 7.7, 4.0, 3.5, 2.8, 2.1, 0.8],
+      backgroundColor: 'rgba(40, 167, 69, 0.7)',
+      borderColor: 'rgba(40, 167, 69, 1)',
+      borderWidth: 1
+    }]
+  };
+
+  // NEW: Farmer Income Trends
+  const incomeData = {
+    labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+    datasets: [
+      {
+        label: 'Average Farmer Income (₹ Thousand/Year)',
+        data: [105, 115, 125, 135, 148, 162],
+        borderColor: 'rgba(255, 193, 7, 1)',
+        backgroundColor: 'rgba(255, 193, 7, 0.2)',
+        tension: 0.4,
+        fill: true
+      }
+    ]
+  };
+
+  // NEW: Organic Farming Coverage
+  const organicData = {
+    labels: ['Madhya Pradesh', 'Rajasthan', 'Maharashtra', 'Uttar Pradesh', 'Karnataka', 'Gujarat', 'Odisha', 'Others'],
+    datasets: [{
+      label: 'Area under Organic Farming (Million Hectares)',
+      data: [1.2, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 1.5],
+      backgroundColor: [
+        'rgba(106, 176, 76, 0.7)',
+        'rgba(65, 149, 69, 0.7)',
+        'rgba(46, 125, 50, 0.7)',
+        'rgba(27, 94, 32, 0.7)',
+        'rgba(56, 142, 60, 0.7)',
+        'rgba(76, 175, 80, 0.7)',
+        'rgba(129, 199, 132, 0.7)',
+        'rgba(200, 230, 201, 0.7)'
+      ],
+      borderColor: 'rgba(255, 255, 255, 0.8)',
+      borderWidth: 2,
+    }]
+  };
+
+  // Enhanced India map data with more states
   const indiaMapData = [
     { state: 'Uttar Pradesh', production: 58, color: '#1f77b4' },
     { state: 'Punjab', production: 31, color: '#ff7f0e' },
@@ -139,7 +226,17 @@ const ChartsSection: React.FC = () => {
     { state: 'Gujarat', production: 14, color: '#e377c2' },
     { state: 'Rajasthan', production: 23, color: '#7f7f7f' },
     { state: 'Andhra Pradesh', production: 21, color: '#bcbd22' },
-    { state: 'Tamil Nadu', production: 17, color: '#17becf' }
+    { state: 'Tamil Nadu', production: 17, color: '#17becf' },
+    { state: 'Bihar', production: 16, color: '#ff9896' },
+    { state: 'Haryana', production: 19, color: '#98df8a' },
+    { state: 'Odisha', production: 12, color: '#c5b0d5' },
+    { state: 'Telangana', production: 14, color: '#ffbb78' },
+    { state: 'Assam', production: 8, color: '#aec7e8' },
+    { state: 'Chhattisgarh', production: 9, color: '#ff7f0e' },
+    { state: 'Kerala', production: 3, color: '#c49c94' },
+    { state: 'Jharkhand', production: 6, color: '#f7b6d2' },
+    { state: 'Uttarakhand', production: 4, color: '#c7c7c7' },
+    { state: 'Himachal Pradesh', production: 2, color: '#dbdb8d' }
   ];
 
   const chartOptions = {
@@ -187,17 +284,61 @@ const ChartsSection: React.FC = () => {
       type: 'production', 
       icon: <PieChart size={16} />,
       component: <Bar data={seasonalData} options={chartOptions} /> 
+    },
+    { 
+      id: 'fertilizer', 
+      title: 'Fertilizer Consumption by State', 
+      type: 'inputs', 
+      icon: <BarChart3 size={16} />,
+      component: <Bar data={fertilizerData} options={{
+        ...chartOptions,
+        scales: {
+          x: {
+            stacked: false,
+          },
+          y: {
+            stacked: false,
+            title: {
+              display: true,
+              text: 'kg/hectare'
+            }
+          }
+        }
+      }} /> 
+    },
+    // NEW: Agricultural Exports Chart
+    { 
+      id: 'exports', 
+      title: 'Agricultural Exports', 
+      type: 'trade', 
+      icon: <TrendingUp size={16} />,
+      component: <Bar data={exportsData} options={chartOptions} /> 
+    },
+    // NEW: Farmer Income Trends Chart
+    { 
+      id: 'income', 
+      title: 'Farmer Income Trends', 
+      type: 'socioeconomic', 
+      icon: <TrendingUp size={16} />,
+      component: <Line data={incomeData} options={chartOptions} /> 
+    },
+    // NEW: Organic Farming Chart
+    { 
+      id: 'organic', 
+      title: 'Organic Farming Coverage', 
+      type: 'sustainable', 
+      icon: <PieChart size={16} />,
+      component: <Doughnut data={organicData} options={chartOptions} /> 
     }
   ];
 
   const filteredCharts = activeFilter === 'all' ? charts : charts.filter(chart => chart.type === activeFilter);
 
-  // Simple India map visualization with image
+  // Enhanced India map visualization with more states
   const renderIndiaMap = () => (
     <div className="india-map-container">
       <div className="map-title">Food Grain Production by State (Million Tons)</div>
       <div className="map-wrapper">
-        {/* India map image as background */}
         <div className="india-map-image">
           <img 
             src="https://i0.wp.com/indiadatamap.com/wp-content/uploads/2025/08/Total-poultry-production-in-India-state-wise-2025.png?resize=1024%2C1024&ssl=1" 
@@ -205,88 +346,19 @@ const ChartsSection: React.FC = () => {
             className="map-bg"
           />
           
-          {/* Interactive state markers */}
           <div className="state-markers">
-            <div 
-              className="state-marker up" 
-              data-production="58" 
-              onClick={() => setSelectedState('Uttar Pradesh')}
-              title="Uttar Pradesh - 58 MT"
-            >
-              UP
-            </div>
-            <div 
-              className="state-marker pb" 
-              data-production="31" 
-              onClick={() => setSelectedState('Punjab')}
-              title="Punjab - 31 MT"
-            >
-              PB
-            </div>
-            <div 
-              className="state-marker mh" 
-              data-production="26" 
-              onClick={() => setSelectedState('Maharashtra')}
-              title="Maharashtra - 26 MT"
-            >
-              MH
-            </div>
-            <div 
-              className="state-marker mp" 
-              data-production="25" 
-              onClick={() => setSelectedState('Madhya Pradesh')}
-              title="Madhya Pradesh - 25 MT"
-            >
-              MP
-            </div>
-            <div 
-              className="state-marker rj" 
-              data-production="23" 
-              onClick={() => setSelectedState('Rajasthan')}
-              title="Rajasthan - 23 MT"
-            >
-              RJ
-            </div>
-            <div 
-              className="state-marker ap" 
-              data-production="21" 
-              onClick={() => setSelectedState('Andhra Pradesh')}
-              title="Andhra Pradesh - 21 MT"
-            >
-              AP
-            </div>
-            <div 
-              className="state-marker wb" 
-              data-production="18" 
-              onClick={() => setSelectedState('West Bengal')}
-              title="West Bengal - 18 MT"
-            >
-              WB
-            </div>
-            <div 
-              className="state-marker tn" 
-              data-production="17" 
-              onClick={() => setSelectedState('Tamil Nadu')}
-              title="Tamil Nadu - 17 MT"
-            >
-              TN
-            </div>
-            <div 
-              className="state-marker ka" 
-              data-production="15" 
-              onClick={() => setSelectedState('Karnataka')}
-              title="Karnataka - 15 MT"
-            >
-              KA
-            </div>
-            <div 
-              className="state-marker gj" 
-              data-production="14" 
-              onClick={() => setSelectedState('Gujarat')}
-              title="Gujarat - 14 MT"
-            >
-              GJ
-            </div>
+            {indiaMapData.map((stateData, index) => (
+              <div
+                key={stateData.state}
+                className={`state-marker ${stateData.state.toLowerCase().replace(/\s+/g, '')}`}
+                data-production={stateData.production}
+                onClick={() => setSelectedState(stateData.state)}
+                title={`${stateData.state} - ${stateData.production} MT`}
+                style={{ backgroundColor: stateData.color }}
+              >
+                {stateData.state.substring(0, 2).toUpperCase()}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -298,11 +370,11 @@ const ChartsSection: React.FC = () => {
         </div>
         <div className="legend-item">
           <span className="legend-color medium"></span>
-          <span>Medium Production (15-25 MT)</span>
+          <span>Medium Production (10-25 MT)</span>
         </div>
         <div className="legend-item">
           <span className="legend-color low"></span>
-          <span>Low Production (&lt;15 MT)</span>
+          <span>Low Production (&lt;10 MT)</span>
         </div>
       </div>
 
@@ -437,7 +509,6 @@ const ChartsSection: React.FC = () => {
 
         .state-marker {
           position: absolute;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
           color: white;
           padding: 8px 12px;
           border-radius: 20px;
@@ -445,27 +516,39 @@ const ChartsSection: React.FC = () => {
           font-size: 0.9rem;
           cursor: pointer;
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
           border: 2px solid rgba(255, 255, 255, 0.3);
+          min-width: 40px;
+          text-align: center;
         }
 
         .state-marker:hover {
           transform: scale(1.1) translateY(-2px);
-          box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
           z-index: 10;
         }
 
-        /* Approximate positioning for major states */
-        .state-marker.up { top: 25%; left: 45%; }
-        .state-marker.pb { top: 15%; left: 42%; }
-        .state-marker.mh { top: 50%; left: 35%; }
-        .state-marker.mp { top: 40%; left: 45%; }
-        .state-marker.rj { top: 30%; left: 30%; }
-        .state-marker.ap { top: 65%; left: 45%; }
-        .state-marker.wb { top: 40%; left: 65%; }
-        .state-marker.tn { top: 75%; left: 45%; }
-        .state-marker.ka { top: 65%; left: 40%; }
-        .state-marker.gj { top: 40%; left: 25%; }
+        /* Enhanced positioning for all major states */
+        .state-marker.uttarpradesh { top: 25%; left: 45%; }
+        .state-marker.punjab { top: 15%; left: 42%; }
+        .state-marker.maharashtra { top: 50%; left: 35%; }
+        .state-marker.madhyapradesh { top: 40%; left: 45%; }
+        .state-marker.karnataka { top: 65%; left: 40%; }
+        .state-marker.westbengal { top: 40%; left: 65%; }
+        .state-marker.gujarat { top: 40%; left: 25%; }
+        .state-marker.rajasthan { top: 30%; left: 30%; }
+        .state-marker.andhrapradesh { top: 65%; left: 45%; }
+        .state-marker.tamilnadu { top: 75%; left: 45%; }
+        .state-marker.bihar { top: 30%; left: 55%; }
+        .state-marker.haryana { top: 20%; left: 45%; }
+        .state-marker.odisha { top: 50%; left: 55%; }
+        .state-marker.telangana { top: 55%; left: 42%; }
+        .state-marker.assam { top: 35%; left: 70%; }
+        .state-marker.chhattisgarh { top: 45%; left: 50%; }
+        .state-marker.kerala { top: 75%; left: 40%; }
+        .state-marker.jharkhand { top: 40%; left: 58%; }
+        .state-marker.uttarakhand { top: 20%; left: 48%; }
+        .state-marker.himachalpradesh { top: 12%; left: 45%; }
 
         .map-legend {
           display: flex;
@@ -682,6 +765,18 @@ const ChartsSection: React.FC = () => {
           <button className={activeFilter === 'infrastructure' ? 'active' : ''} onClick={() => setActiveFilter('infrastructure')}>
             Infrastructure
           </button>
+          <button className={activeFilter === 'inputs' ? 'active' : ''} onClick={() => setActiveFilter('inputs')}>
+            Inputs
+          </button>
+          <button className={activeFilter === 'trade' ? 'active' : ''} onClick={() => setActiveFilter('trade')}>
+            Trade
+          </button>
+          <button className={activeFilter === 'socioeconomic' ? 'active' : ''} onClick={() => setActiveFilter('socioeconomic')}>
+            Socioeconomic
+          </button>
+          <button className={activeFilter === 'sustainable' ? 'active' : ''} onClick={() => setActiveFilter('sustainable')}>
+            Sustainable
+          </button>
         </div>
       </div>
 
@@ -690,7 +785,7 @@ const ChartsSection: React.FC = () => {
         {renderIndiaMap()}
       </div>
 
-      {/* Key Metrics */}
+      {/* Enhanced Key Metrics */}
       <div className="key-metrics">
         <div className="metric-card">
           <div className="metric-value">315M</div>
@@ -707,6 +802,23 @@ const ChartsSection: React.FC = () => {
         <div className="metric-card">
           <div className="metric-value">₹19.5T</div>
           <div className="metric-label">Agricultural GDP</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-value">28.5M</div>
+          <div className="metric-label">Fertilizer Consumption (Tons)</div>
+        </div>
+        {/* NEW METRICS */}
+        <div className="metric-card">
+          <div className="metric-value">$53B</div>
+          <div className="metric-label">Agricultural Exports (2023)</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-value">162K</div>
+          <div className="metric-label">Avg Farmer Income (₹/Year)</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-value">4.3M</div>
+          <div className="metric-label">Organic Farming Area (Hectares)</div>
         </div>
       </div>
 

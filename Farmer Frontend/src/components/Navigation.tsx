@@ -72,13 +72,13 @@ const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange, current
           <Leaf size={16} />
           Farmer Subsidy
         </button>
-        <button
+        {/* <button
           className="nav-tab"
           onClick={() => window.location.href = 'http://localhost:8080/'}
         >
           <Home size={16} />
           Home
-        </button>
+        </button> */}
         <button
           className="nav-tab"
           onClick={() => window.location.href = 'demochatbot.html'}

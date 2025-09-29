@@ -622,7 +622,7 @@ const ProductsManager: React.FC<ProductsManagerProps> = ({
           </div>
           <button
             className="btn btn-primary"
-            onClick={() => (window.location.hash = "upload")}
+            onClick={() => (window.location.hash = "api/products/upload")}
           >
             <Upload size={16} />
             Upload Product

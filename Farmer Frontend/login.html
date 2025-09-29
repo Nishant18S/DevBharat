@@ -10,237 +10,355 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+      position: relative;
+    }
+
+    /* Animated background particles */
+    .bg-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       overflow: hidden;
-      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(34, 197, 94, 0.1);
+      border-radius: 50%;
+      animation: float-particle 20s infinite ease-in-out;
+    }
+
+    @keyframes float-particle {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
     }
 
     .container {
       display: flex;
       min-height: 100vh;
-      background: rgba(0, 0, 0, 0.1);
-    }
-
-    /* Left Side - Video Section */
-    .video-section {
-      flex: 1;
       position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .video-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
       z-index: 1;
     }
 
-    .video-overlay {
+    /* Left Side - Enhanced Hero Section */
+    .hero-section {
+      flex: 1.2;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(
-        135deg,
-        rgba(46, 125, 50, 0.8) 0%,
-        rgba(76, 175, 80, 0.7) 50%,
-        rgba(139, 195, 74, 0.6) 100%
-      );
-      z-index: 2;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%2322c55e" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>') repeat;
+      opacity: 0.3;
     }
 
-    .video-content {
+    .hero-content {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       color: white;
       text-align: center;
-      padding: 40px;
-      max-width: 500px;
+      padding: 60px 40px;
+      max-width: 600px;
+    }
+
+    .brand-container {
+      margin-bottom: 40px;
     }
 
     .brand-logo {
-      width: 80px;
-      height: 80px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      border-radius: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 30px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin: 0 auto 20px;
+      box-shadow: 
+        0 20px 60px rgba(34, 197, 94, 0.4),
+        0 8px 25px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .brand-logo::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(135deg, #22c55e, #16a34a, #15803d);
+      border-radius: 32px;
+      z-index: -1;
+      opacity: 0.5;
+      filter: blur(8px);
+    }
+
+    .brand-logo:hover {
+      transform: translateY(-5px) rotate(5deg);
+      box-shadow: 
+        0 25px 80px rgba(34, 197, 94, 0.6),
+        0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .brand-logo i {
-      font-size: 2.5rem;
-      color: #2E7D32;
+      font-size: 3.5rem;
+      color: white;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     }
 
-    .video-content h1 {
-      font-size: 3rem;
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 800;
       margin-bottom: 20px;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(45deg, #FFF, #E8F5E8);
+      background: linear-gradient(135deg, #ffffff, #e2e8f0, #cbd5e1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      letter-spacing: -0.02em;
     }
 
-    .video-content p {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      margin-bottom: 30px;
-      opacity: 0.95;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    .hero-subtitle {
+      font-size: 1.3rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      opacity: 0.9;
+      font-weight: 400;
+      color: #e2e8f0;
     }
 
-    .features-list {
-      text-align: left;
-      max-width: 400px;
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 500px;
       margin: 0 auto;
     }
 
-    .feature-item {
-      display: flex;
-      align-items: center;
-      margin-bottom: 15px;
-      padding: 10px 15px;
+    .feature-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      padding: 20px;
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      backdrop-filter: blur(5px);
-      transition: all 0.3s ease;
+      border-color: rgba(34, 197, 94, 0.4);
+      box-shadow: 0 10px 30px rgba(34, 197, 94, 0.2);
     }
 
-    .feature-item:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: translateX(10px);
+    .feature-card:hover::before {
+      left: 100%;
     }
 
-    .feature-item i {
-      margin-right: 15px;
-      font-size: 1.3rem;
-      color: #81C784;
-      width: 25px;
+    .feature-card i {
+      font-size: 1.8rem;
+      color: #22c55e;
+      margin-bottom: 10px;
+      display: block;
     }
 
-    .feature-item span {
+    .feature-card span {
+      font-size: 0.95rem;
       font-weight: 500;
+      color: #f1f5f9;
+      line-height: 1.4;
     }
 
-    /* Right Side - Login Section */
+    /* Right Side - Enhanced Login Section */
     .login-section {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .login-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(225deg, rgba(34, 197, 94, 0.02) 0%, rgba(22, 163, 74, 0.05) 100%);
     }
 
     .login-container {
       width: 100%;
-      max-width: 450px;
-      padding: 50px 40px;
+      max-width: 480px;
+      padding: 60px 50px;
+      position: relative;
+      z-index: 1;
     }
 
     .login-header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
     }
 
     .login-header h2 {
-      font-size: 2.2rem;
-      color: #2E7D32;
-      margin-bottom: 10px;
+      font-size: 2.5rem;
       font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
     }
 
     .login-header p {
-      color: #666;
-      font-size: 1rem;
+      color: #64748b;
+      font-size: 1.1rem;
+      font-weight: 400;
     }
 
     .form-group {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
       position: relative;
     }
 
     .form-group label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
       font-weight: 600;
-      color: #2E7D32;
-      font-size: 0.95rem;
+      color: #374151;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
     }
 
-    .input-wrapper {
+    .input-container {
       position: relative;
+      transition: all 0.3s ease;
     }
 
-    .input-wrapper i {
+    .input-container i {
       position: absolute;
-      left: 15px;
+      left: 20px;
       top: 50%;
       transform: translateY(-50%);
-      color: #4CAF50;
-      font-size: 1.1rem;
+      color: #9ca3af;
+      font-size: 1.2rem;
       z-index: 2;
+      transition: all 0.3s ease;
     }
 
     .form-group input {
       width: 100%;
-      padding: 15px 15px 15px 50px;
-      border: 2px solid #E0E0E0;
-      border-radius: 12px;
-      font-size: 1rem;
-      transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.9);
+      padding: 18px 20px 18px 60px;
+      border: 2px solid #e5e7eb;
+      border-radius: 16px;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: rgba(255, 255, 255, 0.8);
+      color: #1f2937;
     }
 
     .form-group input:focus {
       outline: none;
-      border-color: #4CAF50;
-      box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+      border-color: #22c55e;
+      box-shadow: 
+        0 0 0 4px rgba(34, 197, 94, 0.1),
+        0 4px 12px rgba(34, 197, 94, 0.15);
       background: white;
+      transform: translateY(-2px);
+    }
+
+    .form-group input:focus + .input-container i,
+    .input-container:hover i {
+      color: #22c55e;
+      transform: translateY(-50%) scale(1.1);
     }
 
     .form-group input::placeholder {
-      color: #999;
+      color: #9ca3af;
+      font-weight: 400;
     }
 
     .login-btn {
       width: 100%;
-      background: linear-gradient(135deg, #2E7D32, #4CAF50);
+      background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
       color: white;
       border: none;
-      padding: 16px;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      padding: 20px;
+      border-radius: 16px;
+      font-size: 1.2rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.4);
+      letter-spacing: 0.02em;
+    }
+
+    .login-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.6s ease;
     }
 
     .login-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(34, 197, 94, 0.5);
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    }
+
+    .login-btn:hover::before {
+      left: 100%;
     }
 
     .login-btn:active {
-      transform: translateY(0);
+      transform: translateY(-1px);
     }
 
     .login-btn:disabled {
@@ -250,67 +368,74 @@
     }
 
     .message {
-      margin-top: 20px;
-      padding: 15px;
-      border-radius: 10px;
+      margin-top: 25px;
+      padding: 18px 20px;
+      border-radius: 12px;
       text-align: center;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 1rem;
+      backdrop-filter: blur(10px);
     }
 
     .error {
-      background: #FFEBEE;
-      color: #C62828;
-      border: 1px solid #FFCDD2;
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+      border: 1px solid rgba(239, 68, 68, 0.2);
     }
 
     .success {
-      background: #E8F5E9;
-      color: #2E7D32;
-      border: 1px solid #C8E6C9;
+      background: rgba(34, 197, 94, 0.1);
+      color: #16a34a;
+      border: 1px solid rgba(34, 197, 94, 0.2);
     }
 
     .forgot-password {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .forgot-password a {
-      color: #4CAF50;
+      color: #22c55e;
       text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
     }
 
     .forgot-password a:hover {
-      color: #2E7D32;
+      color: #16a34a;
       text-decoration: underline;
     }
 
-    .register-link {
+    .register-section {
       text-align: center;
-      margin-top: 30px;
-      padding: 20px;
-      background: rgba(46, 125, 50, 0.05);
-      border-radius: 12px;
-      color: #666;
+      margin-top: 40px;
+      padding: 25px;
+      background: rgba(34, 197, 94, 0.03);
+      border: 1px solid rgba(34, 197, 94, 0.1);
+      border-radius: 16px;
+      color: #64748b;
+      font-size: 1rem;
     }
 
-    .register-link a {
-      color: #4CAF50;
+    .register-section a {
+      color: #22c55e;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
+      transition: all 0.3s ease;
     }
 
-    .register-link a:hover {
+    .register-section a:hover {
+      color: #16a34a;
       text-decoration: underline;
     }
 
-    /* Loading Animation */
+    /* Enhanced Loading Animation */
     .loading {
       display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid rgba(255,255,255,.3);
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
       border-radius: 50%;
       border-top-color: #fff;
       animation: spin 1s ease-in-out infinite;
@@ -321,145 +446,153 @@
     }
 
     /* Responsive Design */
+    @media (max-width: 1200px) {
+      .hero-content h1 {
+        font-size: 3.5rem;
+      }
+    }
+
     @media (max-width: 1024px) {
       .container {
         flex-direction: column;
       }
 
-      .video-section {
-        height: 40vh;
-        min-height: 300px;
+      .hero-section {
+        min-height: 50vh;
       }
 
       .login-section {
-        flex: none;
-        min-height: 60vh;
+        min-height: 50vh;
       }
 
-      .video-content h1 {
-        font-size: 2.2rem;
-      }
-
-      .video-content {
-        padding: 20px;
+      .features-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
       }
     }
 
     @media (max-width: 768px) {
-      body {
-        overflow-y: auto;
+      .hero-content {
+        padding: 40px 20px;
       }
 
-      .container {
-        min-height: 100vh;
-      }
-
-      .video-section {
-        height: 35vh;
-        min-height: 250px;
-      }
-
-      .video-content {
-        padding: 15px;
-      }
-
-      .video-content h1 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-      }
-
-      .video-content p {
-        font-size: 1rem;
-        margin-bottom: 20px;
+      .hero-content h1 {
+        font-size: 2.8rem;
       }
 
       .login-container {
-        padding: 30px 20px;
+        padding: 40px 30px;
       }
 
       .login-header h2 {
-        font-size: 1.8rem;
+        font-size: 2rem;
       }
 
-      .features-list {
+      .brand-logo {
+        width: 100px;
+        height: 100px;
+      }
+
+      .brand-logo i {
+        font-size: 3rem;
+      }
+
+      .features-grid {
         display: none;
       }
     }
 
-    /* Floating Animation */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 30px 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
     }
 
-    .brand-logo {
-      animation: float 3s ease-in-out infinite;
+    /* Enhanced animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
+
+    .hero-content > * {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .hero-content > *:nth-child(2) { animation-delay: 0.1s; }
+    .hero-content > *:nth-child(3) { animation-delay: 0.2s; }
+    .hero-content > *:nth-child(4) { animation-delay: 0.3s; }
+
+    .login-container > * {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .login-container > *:nth-child(2) { animation-delay: 0.1s; }
+    .login-container > *:nth-child(3) { animation-delay: 0.2s; }
   </style>
 </head>
 <body>
+  <!-- Animated Background -->
+  <div class="bg-particles" id="particles"></div>
+
   <div class="container">
-    <!-- Left Side - Video Section -->
-    <div class="video-section">
-      <video 
-        class="video-background" 
-        autoplay 
-        muted 
-        loop 
-        playsinline
-      >
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-agricultural-field-and-farmhouse-aerial-view-28450-large.mp4" type="video/mp4">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-green-agricultural-field-aerial-view-28451-large.mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-      </video>
-      
-      <div class="video-overlay"></div>
-      
-      <div class="video-content">
-        <div class="brand-logo">
-          <i class="fas fa-leaf"></i>
+    <!-- Left Side - Enhanced Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <div class="brand-container">
+          <div class="brand-logo">
+            <i class="fas fa-seedling"></i>
+          </div>
+          <h1>Kisan Mitra</h1>
+          <p class="hero-subtitle">Empowering farmers with cutting-edge technology for sustainable agriculture and prosperous livelihoods</p>
         </div>
         
-        <h1>Kisan Mitra</h1>
-        <p>Empowering farmers with technology for sustainable agriculture and better livelihoods</p>
-        
-        <div class="features-list">
-          <div class="feature-item">
+        <div class="features-grid">
+          <div class="feature-card">
             <i class="fas fa-shield-alt"></i>
             <span>Secure Aadhaar Authentication</span>
           </div>
-          <div class="feature-item">
-            <i class="fas fa-chart-trending-up"></i>
-            <span>Real-time Market Prices</span>
+          <div class="feature-card">
+            <i class="fas fa-chart-line"></i>
+            <span>Real-time Market Intelligence</span>
           </div>
-          <div class="feature-item">
-            <i class="fas fa-cloud-sun"></i>
-            <span>Weather & Crop Advisory</span>
+          <div class="feature-card">
+            <i class="fas fa-cloud-sun-rain"></i>
+            <span>Smart Weather Insights</span>
           </div>
-          <div class="feature-item">
+          <div class="feature-card">
             <i class="fas fa-handshake"></i>
-            <span>Government Scheme Access</span>
-          </div>
-          <div class="feature-item">
-            <i class="fas fa-mobile-alt"></i>
-            <span>Digital Record Management</span>
+            <span>Government Scheme Portal</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Right Side - Login Section -->
+    <!-- Right Side - Enhanced Login Section -->
     <div class="login-section">
       <div class="login-container">
         <div class="login-header">
-          <h2>Farmer Login</h2>
+          <h2>Welcome Back</h2>
           <p>Access your agricultural dashboard</p>
         </div>
 
         <form id="loginForm">
           <div class="form-group">
             <label for="aadhaar">Aadhaar Number</label>
-            <div class="input-wrapper">
+            <div class="input-container">
               <i class="fas fa-id-card"></i>
               <input 
                 type="text" 
@@ -473,19 +606,19 @@
 
           <div class="form-group">
             <label for="password">Password</label>
-            <div class="input-wrapper">
+            <div class="input-container">
               <i class="fas fa-lock"></i>
               <input 
                 type="password" 
                 id="password" 
-                placeholder="Enter your password" 
+                placeholder="Enter your secure password" 
                 required 
               />
             </div>
           </div>
 
           <button type="submit" class="login-btn" id="loginButton">
-            <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+            <i class="fas fa-sign-in-alt"></i> Access Dashboard
           </button>
 
           <div id="message"></div>
@@ -493,23 +626,48 @@
 
         <div class="forgot-password">
           <a href="./forgot password.html">
-            Forgot your password?
+            <i class="fas fa-question-circle"></i> Forgot your password?
           </a>
         </div>
 
-        <div class="register-link">
-          New farmer? <a href="./register.html" onclick="alert('Welcome to Registration.')">Register here</a>
+        <div class="register-section">
+          New to Kisan Mitra? <a href="./register.html">Create Account</a>
         </div>
       </div>
     </div>
   </div>
 
   <script>
+    // Create animated background particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 15;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random size and position
+        const size = Math.random() * 4 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Initialize particles
+    createParticles();
+
+    // Enhanced form handling
     document.getElementById("loginForm").addEventListener("submit", async function (e) {
       e.preventDefault();
 
       const aadhaarInput = document.getElementById("aadhaar").value.trim();
-      const aadhaar = aadhaarInput.replace(/\s/g, ''); // Remove spaces for validation
+      const aadhaar = aadhaarInput.replace(/\s/g, '');
       const password = document.getElementById("password").value.trim();
       const messageDiv = document.getElementById("message");
       const loginButton = document.getElementById("loginButton");
@@ -518,24 +676,23 @@
       messageDiv.innerHTML = '';
       messageDiv.className = 'message';
 
-      // Validate Aadhaar
+      // Enhanced validation
       if (!/^\d{12}$/.test(aadhaar)) {
-        messageDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-circle"></i> Please enter a valid 12-digit Aadhaar number</div>';
+        messageDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-triangle"></i> Please enter a valid 12-digit Aadhaar number</div>';
         return;
       }
 
-      // Validate password
       if (password.length < 6) {
-        messageDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-circle"></i> Password must be at least 6 characters</div>';
+        messageDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-triangle"></i> Password must be at least 6 characters long</div>';
         return;
       }
 
-      // Show loading state
+      // Enhanced loading state
       loginButton.disabled = true;
       loginButton.innerHTML = '<div class="loading"></div> Authenticating...';
 
       try {
-        const response = await fetch("https://kisan-mitra-backend.vercel.app/api/farmer/login", {
+        const response = await fetch("http://localhost:5000/api/farmer/login", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -544,49 +701,47 @@
         });
 
         const data = await response.json();
-        console.log('Login response:', data);
 
         if (response.ok) {
-          messageDiv.innerHTML = '<div class="success"><i class="fas fa-check-circle"></i> Login successful! Redirecting to dashboard...</div>';
+          messageDiv.innerHTML = '<div class="success"><i class="fas fa-check-circle"></i> Authentication successful! Redirecting to your dashboard...</div>';
           
           // Save farmer data
           sessionStorage.setItem('farmerName', data.farmer.name);
           sessionStorage.setItem('farmerData', JSON.stringify(data.farmer));
           sessionStorage.setItem('aadhaars', data.farmer.aadhaar);
-        sessionStorage.setItem('mobile', data.farmer.mobile);
-        sessionStorage.setItem('email', data.farmer.email);
-        sessionStorage.setItem('paddress', data.farmer.presentAddress);
+          sessionStorage.setItem('mobile', data.farmer.mobile);
+          sessionStorage.setItem('email', data.farmer.email);
+          sessionStorage.setItem('paddress', data.farmer.presentAddress);
           
-          // Redirect after short delay
           setTimeout(() => {
-            window.location.href = 'dashboard.html';
+            window.location.href = 'dashboard';
           }, 1500);
         } else {
-          messageDiv.innerHTML = `<div class="error"><i class="fas fa-times-circle"></i> ${data.message || "Login failed. Please check your credentials."}</div>`;
+          messageDiv.innerHTML = `<div class="error"><i class="fas fa-times-circle"></i> ${data.message || "Authentication failed. Please verify your credentials."}</div>`;
         }
       } catch (err) {
         console.error("Login error:", err);
-        messageDiv.innerHTML = '<div class="error"><i class="fas fa-exclamation-triangle"></i> Network error. Please check your connection and try again.</div>';
+        let errorMessage = '<div class="error"><i class="fas fa-exclamation-triangle"></i> Network connection error. Please check your connection and try again.</div>';
         
         if (err.name === 'TypeError' && err.message.includes('fetch')) {
-          messageDiv.innerHTML = '<div class="error"><i class="fas fa-server"></i> Cannot connect to server. Please ensure the backend is running.</div>';
+          errorMessage = '<div class="error"><i class="fas fa-server"></i> Unable to connect to server. Please ensure the backend service is running.</div>';
         }
+        
+        messageDiv.innerHTML = errorMessage;
       } finally {
         loginButton.disabled = false;
-        loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login to Dashboard';
+        loginButton.innerHTML = '<i class="fas fa-sign-in-alt"></i> Access Dashboard';
       }
     });
 
-    // Format Aadhaar input in **** **** **** pattern
+    // Enhanced Aadhaar formatting
     document.getElementById("aadhaar").addEventListener("input", function (e) {
-      let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+      let value = e.target.value.replace(/\D/g, '');
       
-      // Limit to 12 digits
       if (value.length > 12) {
         value = value.substring(0, 12);
       }
       
-      // Format in groups of 4 with spaces
       let formattedValue = '';
       for (let i = 0; i < value.length; i += 4) {
         if (formattedValue.length > 0) {
@@ -598,7 +753,34 @@
       e.target.value = formattedValue;
     });
 
-    // Prevent non-numeric input
+    // Enhanced input interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input');
+      
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentNode.style.transform = 'scale(1.02)';
+          this.parentNode.style.transition = 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        });
+        
+        input.addEventListener('blur', function() {
+          this.parentNode.style.transform = 'scale(1)';
+        });
+      });
+
+      // Add subtle parallax effect to hero section
+      window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const parallax = document.querySelector('.hero-section');
+        const speed = 0.5;
+        
+        if (parallax) {
+          parallax.style.transform = `translateY(${scrolled * speed}px)`;
+        }
+      });
+    });
+
+    // Prevent non-numeric input for Aadhaar
     document.getElementById("aadhaar").addEventListener("keypress", function(e) {
       const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
       
@@ -609,20 +791,6 @@
       if (!/\d/.test(e.key)) {
         e.preventDefault();
       }
-    });
-
-    // Add subtle animation to form elements
-    document.addEventListener('DOMContentLoaded', function() {
-      const inputs = document.querySelectorAll('input');
-      inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-          this.parentNode.style.transform = 'scale(1.02)';
-        });
-        
-        input.addEventListener('blur', function() {
-          this.parentNode.style.transform = 'scale(1)';
-        });
-      });
     });
   </script>
 </body>
