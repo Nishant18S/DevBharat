@@ -52,7 +52,7 @@ const VoiceAssistant: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('hi');
   
-  const apiKey = 'AIzaSyAn80nBH76GuwNGQVkw5-s7VPGZm368t5w';
+  const apiKey = '';
 
   const languages = {
     'hi': { name: 'हिंदी (Hindi)', code: 'hi-IN', flag: '🇮🇳' },
