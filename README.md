@@ -1,6 +1,8 @@
 # 🌱 DevBharat - Empowering Rural Farmers with Technology  
 
-![DevBharat Logo](assets/team-photo.png)  
+<img width="1280" height="720" alt="Yellow And Green Traditional Indian Farmer YouTube Thumbnail" src="https://github.com/user-attachments/assets/2a255c15-b02a-4724-8bc6-51d3164eff07" />
+
+
 *Smart India Hackathon 2025 | Problem Statement ID – SIH25109*  
 
 > **Theme:** Agriculture, FoodTech & Rural Development  
@@ -138,11 +140,13 @@ This solution bridges the **rural-digital divide** through:
 ## 📸 Screenshots
 
 - **Home Page**  
-  ![Home Page](assets/home-page.png)
+<img width="1918" height="913" alt="Screenshot 2025-09-29 164940" src="https://github.com/user-attachments/assets/797be59d-2788-4195-ac94-47c4195afb3d" />
 
-- **Register & Login**  
-  ![Register](assets/register.png)  
-  ![Login](assets/login.png)
+- **Register**  
+<img width="582" height="705" alt="Screenshot 2025-09-29 164311" src="https://github.com/user-attachments/assets/4c6968e1-be10-4b3a-be46-68e9e46dafb3" />
+
+- **Login**  
+<img width="1918" height="922" alt="Screenshot 2025-09-29 164159" src="https://github.com/user-attachments/assets/8f37170b-2ada-4119-9220-3b1bca57399a" />
 
 ---
 
